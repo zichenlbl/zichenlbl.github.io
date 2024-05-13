@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>CentOS 7 部署ASP.NET Core项目 | Zichen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. Linux安装环境参考官网链接：在 CentOS 上安装 .NET - .NET | Microsoft Docs 1.1 注册Microsoft密钥和源将 Microsoft 包签名密钥添加到受信任密钥列表，并添加 Microsoft 包存储库。 1sudo rpm -Uvh https:&#x2F;&#x2F;packages.microsoft.com&#x2F;config&#x2F;centos&#x2F;7&#x2F;packages-m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS 7 部署ASP.NET Core项目">
+<meta property="og:url" content="https://zichenlbl.github.io/2022/08/17/centos7-deploys-asp.net-core-project/index.html">
+<meta property="og:site_name" content="Zichen">
+<meta property="og:description" content="1. Linux安装环境参考官网链接：在 CentOS 上安装 .NET - .NET | Microsoft Docs 1.1 注册Microsoft密钥和源将 Microsoft 包签名密钥添加到受信任密钥列表，并添加 Microsoft 包存储库。 1sudo rpm -Uvh https:&#x2F;&#x2F;packages.microsoft.com&#x2F;config&#x2F;centos&#x2F;7&#x2F;packages-m">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://zichenlbl.github.io/2022/08/17/centos7-deploys-asp.net-core-project/image-20220817221919493.png">
+<meta property="og:image" content="https://zichenlbl.github.io/2022/08/17/centos7-deploys-asp.net-core-project/image-20220817221938095.png">
+<meta property="og:image" content="https://zichenlbl.github.io/2022/08/17/centos7-deploys-asp.net-core-project/image-20220817222019199.png">
+<meta property="og:image" content="https://zichenlbl.github.io/2022/08/17/centos7-deploys-asp.net-core-project/image-20220817222201192.png">
+<meta property="og:image" content="https://zichenlbl.github.io/2022/08/17/centos7-deploys-asp.net-core-project/image-20220817222358623.png">
+<meta property="article:published_time" content="2022-08-17T14:01:00.000Z">
+<meta property="article:modified_time" content="2023-09-30T13:34:58.477Z">
+<meta property="article:author" content="Zichen">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content=".NET">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zichenlbl.github.io/2022/08/17/centos7-deploys-asp.net-core-project/image-20220817221919493.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Zichen" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.geekzu.org/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?786cc850f704e5c91f9db88eaa7e7798";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Zichen</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://zichenlbl.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-centos7-deploys-asp.net-core-project" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/08/17/centos7-deploys-asp.net-core-project/" class="article-date">
+  <time datetime="2022-08-17T14:01:00.000Z" itemprop="datePublished">2022-08-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CentOS 7 部署ASP.NET Core项目
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-Linux安装环境"><a href="#1-Linux安装环境" class="headerlink" title="1. Linux安装环境"></a>1. Linux安装环境</h2><p>参考官网链接：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/dotnet/core/install/linux-centos">在 CentOS 上安装 .NET - .NET | Microsoft Docs</a></p>
+<h3 id="1-1-注册Microsoft密钥和源"><a href="#1-1-注册Microsoft密钥和源" class="headerlink" title="1.1 注册Microsoft密钥和源"></a>1.1 注册Microsoft密钥和源</h3><p>将 Microsoft 包签名密钥添加到受信任密钥列表，并添加 Microsoft 包存储库。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>如图1-1所示：<img src="/2022/08/17/centos7-deploys-asp.net-core-project/image-20220817221919493.png" alt="image-20220817221919493"></p>
+<p>​                                                                                                         图1-1</p>
+<h3 id="1-2-安装SDK-不安装"><a href="#1-2-安装SDK-不安装" class="headerlink" title="1.2 安装SDK(不安装)"></a>1.2 安装SDK(不安装)</h3><p>.NET SDK 使你可以通过 .NET 开发应用。 如果安装 .NET SDK，则无需安装相应的运行时。</p>
+<p>版本号可以自定义：例 3.0</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install dotnet-sdk-6.0</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-安装运行时"><a href="#1-3-安装运行时" class="headerlink" title="1.3 安装运行时"></a>1.3 安装运行时</h3><p>通过 ASP.NET Core 运行时，可以运行使用 .NET 开发且未提供运行时的应用。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install aspnetcore-runtime-6.0</span><br></pre></td></tr></table></figure>
+
+<p>扩展(==不安装==)：</p>
+<p>作为 ASP.NET Core 运行时的一种替代方法，你可以安装不包含 ASP.NET Core 支持的 .NET 运行时：将上一命令中的 aspnetcore-runtime-6.0 替换为 dotnet-runtime-6.0：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install dotnet-runtime-6.0</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-检测安装成功"><a href="#1-4-检测安装成功" class="headerlink" title="1.4 检测安装成功"></a>1.4 检测安装成功</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dotnet --info</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-5-完整安装代码"><a href="#1-5-完整安装代码" class="headerlink" title="1.5 完整安装代码"></a>1.5 完整安装代码</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line">Welcome to Alibaba Cloud Elastic Compute Service !</span><br><span class="line">[root@abcdefghijklmnopqrst ~]# sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm</span><br><span class="line">Retrieving https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm</span><br><span class="line">Preparing...                          ################################# [100%]</span><br><span class="line">Updating / installing...</span><br><span class="line">   1:packages-microsoft-prod-1.0-1    ################################# [100%]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@abcdefghijklmnopqrst ~]# sudo yum install aspnetcore-runtime-3.1</span><br><span class="line">Loaded plugins: fastestmirror</span><br><span class="line">Determining fastest mirrors</span><br><span class="line">base                                                                                                                                | 3.6 kB  00:00:00     </span><br><span class="line">epel                                                                                                                                | 4.7 kB  00:00:00     </span><br><span class="line">extras                                                                                                                              | 2.9 kB  00:00:00     </span><br><span class="line">packages-microsoft-com-prod                                                                                                         | 3.0 kB  00:00:00     </span><br><span class="line">updates                                                                                                                             | 2.9 kB  00:00:00     </span><br><span class="line">(1/8): base/7/x86_64/group_gz                                                                                                       | 153 kB  00:00:00     </span><br><span class="line">(2/8): epel/x86_64/group_gz                                                                                                         |  97 kB  00:00:00     </span><br><span class="line">(3/8): epel/x86_64/updateinfo                                                                                                       | 1.0 MB  00:00:00     </span><br><span class="line">(4/8): extras/7/x86_64/primary_db                                                                                                   | 247 kB  00:00:00     </span><br><span class="line">(5/8): epel/x86_64/primary_db                                                                                                       | 7.0 MB  00:00:00     </span><br><span class="line">(6/8): base/7/x86_64/primary_db                                                                                                     | 6.1 MB  00:00:00     </span><br><span class="line">(7/8): updates/7/x86_64/primary_db                                                                                                  |  17 MB  00:00:00     </span><br><span class="line">(8/8): packages-microsoft-com-prod/primary_db                                                                                       | 617 kB  00:00:02     </span><br><span class="line">Resolving Dependencies</span><br><span class="line"><span class="meta prompt_">--&gt; </span><span class="language-bash">Running transaction check</span></span><br><span class="line"><span class="meta prompt_">---&gt; </span><span class="language-bash">Package aspnetcore-runtime-3.1.x86_64 0:3.1.28-1 will be installed</span></span><br><span class="line"><span class="meta prompt_">--&gt; </span><span class="language-bash">Processing Dependency: dotnet-runtime-3.1 &gt;= 3.1.28 <span class="keyword">for</span> package: aspnetcore-runtime-3.1-3.1.28-1.x86_64</span></span><br><span class="line"><span class="meta prompt_">--&gt; </span><span class="language-bash">Running transaction check</span></span><br><span class="line"><span class="meta prompt_">---&gt; </span><span class="language-bash">Package dotnet-runtime-3.1.x86_64 0:3.1.28-1 will be installed</span></span><br><span class="line"><span class="meta prompt_">--&gt; </span><span class="language-bash">Processing Dependency: dotnet-hostfxr-3.1 &gt;= 3.1.28 <span class="keyword">for</span> package: dotnet-runtime-3.1-3.1.28-1.x86_64</span></span><br><span class="line"><span class="meta prompt_">--&gt; </span><span class="language-bash">Processing Dependency: dotnet-runtime-deps-3.1 &gt;= 3.1.28 <span class="keyword">for</span> package: dotnet-runtime-3.1-3.1.28-1.x86_64</span></span><br><span class="line"><span class="meta prompt_">--&gt; </span><span class="language-bash">Running transaction check</span></span><br><span class="line"><span class="meta prompt_">---&gt; </span><span class="language-bash">Package dotnet-hostfxr-3.1.x86_64 0:3.1.28-1 will be installed</span></span><br><span class="line"><span class="meta prompt_">--&gt; </span><span class="language-bash">Processing Dependency: dotnet-host &gt;= 3.1.28 <span class="keyword">for</span> package: dotnet-hostfxr-3.1-3.1.28-1.x86_64</span></span><br><span class="line"><span class="meta prompt_">---&gt; </span><span class="language-bash">Package dotnet-runtime-deps-3.1.x86_64 0:3.1.28-1 will be installed</span></span><br><span class="line"><span class="meta prompt_">--&gt; </span><span class="language-bash">Processing Dependency: libicu <span class="keyword">for</span> package: dotnet-runtime-deps-3.1-3.1.28-1.x86_64</span></span><br><span class="line"><span class="meta prompt_">--&gt; </span><span class="language-bash">Running transaction check</span></span><br><span class="line"><span class="meta prompt_">---&gt; </span><span class="language-bash">Package dotnet-host.x86_64 0:6.0.8-1 will be installed</span></span><br><span class="line"><span class="meta prompt_">---&gt; </span><span class="language-bash">Package libicu.x86_64 0:50.2-4.el7_7 will be installed</span></span><br><span class="line"><span class="meta prompt_">--&gt; </span><span class="language-bash">Finished Dependency Resolution</span></span><br><span class="line"></span><br><span class="line">Dependencies Resolved</span><br><span class="line"></span><br><span class="line">===========================================================================================================================================================</span><br><span class="line"> Package                                    Arch                      Version                         Repository                                      Size</span><br><span class="line">===========================================================================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> aspnetcore-runtime-3.1                     x86_64                    3.1.28-1                        packages-microsoft-com-prod                    7.5 M</span><br><span class="line">Installing for dependencies:</span><br><span class="line"> dotnet-host                                x86_64                    6.0.8-1                         packages-microsoft-com-prod                     67 k</span><br><span class="line"> dotnet-hostfxr-3.1                         x86_64                    3.1.28-1                        packages-microsoft-com-prod                    148 k</span><br><span class="line"> dotnet-runtime-3.1                         x86_64                    3.1.28-1                        packages-microsoft-com-prod                     29 M</span><br><span class="line"> dotnet-runtime-deps-3.1                    x86_64                    3.1.28-1                        packages-microsoft-com-prod                    2.8 k</span><br><span class="line"> libicu                                     x86_64                    50.2-4.el7_7                    base                                           6.9 M</span><br><span class="line"></span><br><span class="line">Transaction Summary</span><br><span class="line">===========================================================================================================================================================</span><br><span class="line">Install  1 Package (+5 Dependent packages)</span><br><span class="line"></span><br><span class="line">Total download size: 43 M</span><br><span class="line">Installed size: 115 M</span><br><span class="line">Is this ok [y/d/N]: y</span><br><span class="line">Downloading packages:</span><br><span class="line">warning: /var/cache/yum/x86_64/7/packages-microsoft-com-prod/packages/aspnetcore-runtime-3.1.28-x64.rpm: Header V4 RSA/SHA256 Signature, key ID be1229cf: NOKEY</span><br><span class="line">Public key for aspnetcore-runtime-3.1.28-x64.rpm is not installed</span><br><span class="line">(1/6): aspnetcore-runtime-3.1.28-x64.rpm                                                                                            | 7.5 MB  00:00:02     </span><br><span class="line">(2/6): dotnet-hostfxr-3.1.28-x64.rpm                                                                                                | 148 kB  00:00:00     </span><br><span class="line">(3/6): dotnet-host-6.0.8-x64.rpm                                                                                                    |  67 kB  00:00:02     </span><br><span class="line">(4/6): dotnet-runtime-deps-3.1.28-centos.7-x64.rpm                                                                                  | 2.8 kB  00:00:00     </span><br><span class="line">(5/6): libicu-50.2-4.el7_7.x86_64.rpm                                                                                               | 6.9 MB  00:00:00     </span><br><span class="line">(6/6): dotnet-runtime-3.1.28-x64.rpm                                                                                                |  29 MB  00:00:02     </span><br><span class="line">-----------------------------------------------------------------------------------------------------------------------------------------------------------</span><br><span class="line">Total                                                                                                                      9.6 MB/s |  43 MB  00:00:04     </span><br><span class="line">Retrieving key from https://packages.microsoft.com/keys/microsoft.asc</span><br><span class="line">Importing GPG key 0xBE1229CF:</span><br><span class="line"> Userid     : &quot;Microsoft (Release signing) &lt;gpgsecurity@microsoft.com&gt;&quot;</span><br><span class="line"> Fingerprint: bc52 8686 b50d 79e3 39d3 721c eb3e 94ad be12 29cf</span><br><span class="line"> From       : https://packages.microsoft.com/keys/microsoft.asc</span><br><span class="line">Is this ok [y/N]: y</span><br><span class="line">Running transaction check</span><br><span class="line">Running transaction test</span><br><span class="line">Transaction test succeeded</span><br><span class="line">Running transaction</span><br><span class="line">  Installing : dotnet-host-6.0.8-1.x86_64                                                                                                                                                    1/6 </span><br><span class="line">  Installing : dotnet-hostfxr-3.1-3.1.28-1.x86_64                                                                                                                                            2/6 </span><br><span class="line">  Installing : libicu-50.2-4.el7_7.x86_64                                                                                                                                                    3/6 </span><br><span class="line">  Installing : dotnet-runtime-deps-3.1-3.1.28-1.x86_64                                                                                                                                       4/6 </span><br><span class="line">  Installing : dotnet-runtime-3.1-3.1.28-1.x86_64                                                                                                                                            5/6 </span><br><span class="line">  Installing : aspnetcore-runtime-3.1-3.1.28-1.x86_64                                                                                                                                        6/6 </span><br><span class="line">  Verifying  : dotnet-hostfxr-3.1-3.1.28-1.x86_64                                                                                                                                            1/6 </span><br><span class="line">  Verifying  : aspnetcore-runtime-3.1-3.1.28-1.x86_64                                                                                                                                        2/6 </span><br><span class="line">  Verifying  : dotnet-runtime-3.1-3.1.28-1.x86_64                                                                                                                                            3/6 </span><br><span class="line">  Verifying  : libicu-50.2-4.el7_7.x86_64                                                                                                                                                    4/6 </span><br><span class="line">  Verifying  : dotnet-host-6.0.8-1.x86_64                                                                                                                                                    5/6 </span><br><span class="line">  Verifying  : dotnet-runtime-deps-3.1-3.1.28-1.x86_64                                                                                                                                       6/6 </span><br><span class="line"></span><br><span class="line">Installed:</span><br><span class="line">  aspnetcore-runtime-3.1.x86_64 0:3.1.28-1                                                                                                                                                       </span><br><span class="line"></span><br><span class="line">Dependency Installed:</span><br><span class="line">  dotnet-host.x86_64 0:6.0.8-1    dotnet-hostfxr-3.1.x86_64 0:3.1.28-1    dotnet-runtime-3.1.x86_64 0:3.1.28-1    dotnet-runtime-deps-3.1.x86_64 0:3.1.28-1    libicu.x86_64 0:50.2-4.el7_7   </span><br><span class="line"></span><br><span class="line">Complete!</span><br><span class="line"></span><br><span class="line">[root@abcdefghijklmnopqrst ~]# dotnet --info</span><br><span class="line">  It was not possible to find any installed .NET Core SDKs</span><br><span class="line">  Did you mean to run .NET Core SDK commands? Install a .NET Core SDK from:</span><br><span class="line">      https://aka.ms/dotnet-download</span><br><span class="line"></span><br><span class="line">Host (useful for support):</span><br><span class="line">  Version: 3.1.28</span><br><span class="line">  Commit:  ce3350c1cc</span><br><span class="line"></span><br><span class="line">.NET Core SDKs installed:</span><br><span class="line">  No SDKs were found.</span><br><span class="line"></span><br><span class="line">.NET Core runtimes installed:</span><br><span class="line">  Microsoft.AspNetCore.App 3.1.28 [/usr/share/dotnet/shared/Microsoft.AspNetCore.App]</span><br><span class="line">  Microsoft.NETCore.App 3.1.28 [/usr/share/dotnet/shared/Microsoft.NETCore.App]</span><br><span class="line"></span><br><span class="line">To install additional .NET Core runtimes or SDKs:</span><br><span class="line">  https://aka.ms/dotnet-download</span><br><span class="line">[root@abcdefghijklmnopqrst ~]# </span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-项目配置"><a href="#2-项目配置" class="headerlink" title="2. 项目配置"></a>2. 项目配置</h2><h3 id="2-1-访问的url"><a href="#2-1-访问的url" class="headerlink" title="2.1 访问的url"></a>2.1 访问的url</h3><p><strong>Program.cs</strong></p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> IHostBuilder <span class="title">CreateHostBuilder</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span> =&gt;</span><br><span class="line">        Host.CreateDefaultBuilder(args)</span><br><span class="line">            .ConfigureWebHostDefaults(webBuilder =&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                webBuilder.UseUrls(<span class="string">&quot;http://*:80&quot;</span>).UseStartup&lt;Startup&gt;();</span><br><span class="line">            &#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-发布网站"><a href="#2-2-发布网站" class="headerlink" title="2.2 发布网站"></a>2.2 发布网站</h3><img src="/2022/08/17/centos7-deploys-asp.net-core-project/image-20220817221938095.png" alt="image-20220817221938095" style="zoom:50%;">
+
+<h3 id="2-3-把文件放在Linux中"><a href="#2-3-把文件放在Linux中" class="headerlink" title="2.3 把文件放在Linux中"></a>2.3 把文件放在Linux中</h3><p>(==网站目录==)我的网站放在Linux目录：/www/core/ 目录下</p>
+<p><img src="/2022/08/17/centos7-deploys-asp.net-core-project/image-20220817222019199.png" alt="image-20220817222019199"></p>
+<p>进入 /www/core/ 目录运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dotnet top.libeilin.orange.dll</span><br></pre></td></tr></table></figure>
+
+<p>或者指定端口运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dotnet top.libeilin.orange.dll --urls &quot;http://*:80&quot;</span><br></pre></td></tr></table></figure>
+
+<p>完整代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@abcdefghijklmnopqrst core]# dotnet top.libeilin.orange.dll </span><br><span class="line">info: Microsoft.Hosting.Lifetime[0]</span><br><span class="line">      Now listening on: http://[::]:80</span><br><span class="line">info: Microsoft.Hosting.Lifetime[0]</span><br><span class="line">      Application started. Press Ctrl+C to shut down.</span><br><span class="line">info: Microsoft.Hosting.Lifetime[0]</span><br><span class="line">      Hosting environment: Production</span><br><span class="line">info: Microsoft.Hosting.Lifetime[0]</span><br><span class="line">      Content root path: /www/core</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-用浏览器访问"><a href="#2-4-用浏览器访问" class="headerlink" title="2.4 用浏览器访问"></a>2.4 用浏览器访问</h3><p>访问Linux服务器地址：</p>
+<img src="/2022/08/17/centos7-deploys-asp.net-core-project/image-20220817222201192.png" alt="image-20220817222201192" style="zoom: 50%;">
+
+<h2 id="3-Linux网站配置"><a href="#3-Linux网站配置" class="headerlink" title="3. Linux网站配置"></a>3. Linux网站配置</h2><h3 id="3-1-设置开机自启动网站"><a href="#3-1-设置开机自启动网站" class="headerlink" title="3.1 设置开机自启动网站"></a>3.1 设置开机自启动网站</h3><p>设置.net core项目开启自启动：</p>
+<p>在 /etc/systemd/system/ 目录下创建 xx.service 文件。</p>
+<p>如创建并编辑mycscore.service文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/systemd/system/mycscore.service</span><br></pre></td></tr></table></figure>
+
+<p>按i键，插入内容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[<span class="title class_">Unit</span>]</span><br><span class="line"><span class="title class_">Description</span>=<span class="string">&quot;ubif Service&quot;</span></span><br><span class="line"></span><br><span class="line">[<span class="title class_">Service</span>]</span><br><span class="line"><span class="title class_">Type</span>=simple</span><br><span class="line"><span class="title class_">GuessMainPID</span>=<span class="literal">true</span></span><br><span class="line"><span class="title class_">WorkingDirectory</span>=<span class="regexp">/www/</span>core/                            <span class="comment">//项目路径(删除此注释)</span></span><br><span class="line"><span class="title class_">StandardOutput</span>=journal</span><br><span class="line"><span class="title class_">StandardError</span>=journal</span><br><span class="line"><span class="title class_">ExecStart</span>=<span class="regexp">/usr/</span>bin/dotnet top.<span class="property">libeilin</span>.<span class="property">orange</span>.<span class="property">dll</span>      <span class="comment">//启动指令(删除此注释)</span></span><br><span class="line"><span class="title class_">Restart</span>=always</span><br><span class="line"></span><br><span class="line">[<span class="title class_">Install</span>]</span><br><span class="line"><span class="title class_">WantedBy</span>=multi-user.<span class="property">target</span></span><br></pre></td></tr></table></figure>
+
+<p>插入完成后，按Esc键，</p>
+<p>输入 :wq</p>
+<p>保存并退出。</p>
+<p>mycscore.service文件内容如下：</p>
+<img src="/2022/08/17/centos7-deploys-asp.net-core-project/image-20220817222358623.png" alt="image-20220817222358623" style="zoom:50%;">
+
+<h3 id="3-2-使自启动生效"><a href="#3-2-使自启动生效" class="headerlink" title="3.2 使自启动生效"></a>3.2 使自启动生效</h3><p>进入<code>/etc/systemd/system/</code>目录，使自启动生效：<code>systemctl enable mycscore.service</code></p>
+<h3 id="3-3-立即启动项目服务"><a href="#3-3-立即启动项目服务" class="headerlink" title="3.3 立即启动项目服务"></a>3.3 立即启动项目服务</h3><p>进入<code>/etc/systemd/system/</code>目录，立即启动项目服务：<code>systemctl start mycscore.service</code></p>
+<h3 id="3-4-查看服务状态"><a href="#3-4-查看服务状态" class="headerlink" title="3.4 查看服务状态"></a>3.4 查看服务状态</h3><p>进入<code>/etc/systemd/system/</code>目录，查看服务状态：<code>systemctl status mycscore.service</code></p>
+<h3 id="3-5-重启服务器访问网站"><a href="#3-5-重启服务器访问网站" class="headerlink" title="3.5 重启服务器访问网站"></a>3.5 重启服务器访问网站</h3><p>重启命令：<code>shutdown -r now</code></p>
+<h3 id="3-6-关闭指定服务"><a href="#3-6-关闭指定服务" class="headerlink" title="3.6 关闭指定服务"></a>3.6 关闭指定服务</h3><p>更新项目代码时，关闭服务，更新代码结束后再启动项目服务。</p>
+<p>进入<code>/etc/systemd/system/</code>目录，关闭服务：<code>systemctl stop mycscore.service</code></p>
+<h3 id="3-7-完整启动代码"><a href="#3-7-完整启动代码" class="headerlink" title="3.7 完整启动代码"></a>3.7 完整启动代码</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@abcdefghijklmnopqrst ~]# cd /etc/systemd/system/</span><br><span class="line">[root@abcdefghijklmnopqrst system]# ll</span><br><span class="line">total 1</span><br><span class="line">-rw-r--r--  1 root root  251 Aug 17 14:19 mycscore.service</span><br><span class="line">[root@abcdefghijklmnopqrst system]# systemctl enable mycscore.service </span><br><span class="line">Created symlink from /etc/systemd/system/multi-user.target.wants/mycscore.service to /etc/systemd/system/mycscore.service.</span><br><span class="line">           </span><br><span class="line">[root@abcdefghijklmnopqrst system]# systemctl start mycscore.service </span><br><span class="line">[root@abcdefghijklmnopqrst system]# systemctl status mycscore.service </span><br><span class="line">● mycscore.service - &quot;ubif Service&quot;</span><br><span class="line">   Loaded: loaded (/etc/systemd/system/mycscore.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: active (running) since Wed 2022-08-17 15:19:05 CST; 1min 21s ago</span><br><span class="line"> Main PID: 16315 (dotnet)</span><br><span class="line">   CGroup: /system.slice/mycscore.service</span><br><span class="line">           └─16315 /usr/bin/dotnet top.libeilin.orange.dll</span><br><span class="line">Aug 17 15:19:06 iZbp1fyyv5xvqndeifj43aZ dotnet[16315]: warn: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[35]</span><br><span class="line">Aug 17 15:19:06 iZbp1fyyv5xvqndeifj43aZ dotnet[16315]: No XML encryptor configured. Key &#123;6d2d3343-19e2-494c-bd9f-11be1cc726eb&#125; may be persisted t...d form.</span><br><span class="line">Aug 17 15:19:06 iZbp1fyyv5xvqndeifj43aZ dotnet[16315]: info: Microsoft.Hosting.Lifetime[0]</span><br><span class="line">Aug 17 15:19:06 iZbp1fyyv5xvqndeifj43aZ dotnet[16315]: Now listening on: http://[::]:80</span><br><span class="line">Aug 17 15:19:06 iZbp1fyyv5xvqndeifj43aZ dotnet[16315]: info: Microsoft.Hosting.Lifetime[0]</span><br><span class="line">Aug 17 15:19:06 iZbp1fyyv5xvqndeifj43aZ dotnet[16315]: Application started. Press Ctrl+C to shut down.</span><br><span class="line">Aug 17 15:19:06 iZbp1fyyv5xvqndeifj43aZ dotnet[16315]: info: Microsoft.Hosting.Lifetime[0]</span><br><span class="line">Aug 17 15:19:06 iZbp1fyyv5xvqndeifj43aZ dotnet[16315]: Hosting environment: Production</span><br><span class="line">Aug 17 15:19:06 iZbp1fyyv5xvqndeifj43aZ dotnet[16315]: info: Microsoft.Hosting.Lifetime[0]</span><br><span class="line">Aug 17 15:19:06 iZbp1fyyv5xvqndeifj43aZ dotnet[16315]: Content root path: /www/core</span><br><span class="line">Hint: Some lines were ellipsized, use -l to show in full.</span><br><span class="line">[root@abcdefghijklmnopqrst system]# </span><br></pre></td></tr></table></figure>
+
+<p>End.</p>
+<p>谢谢您的阅读！</p>
+<p>Copyright 2022 Zichen</p>
+<p>Licensed under the Apache License, Version 2.0 (the “License”);<br>you may not use this file except in compliance with the License.<br>You may obtain a copy of the License at</p>
+<p><a target="_blank" rel="noopener" href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+<p>Unless required by applicable law or agreed to in writing, software<br>distributed under the License is distributed on an “AS IS” BASIS,<br>WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br>See the License for the specific language governing permissions and<br>limitations under the License.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://zichenlbl.github.io/2022/08/17/centos7-deploys-asp.net-core-project/" data-id="clw4yejph0085vor9fcl5f486" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NET/" rel="tag">.NET</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+    
+    <div id="my-container"></div>
+    <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    <script>
+    var gitment = new Gitment({
+      id: 'CentOS 7 部署ASP.NET Core项目', // 可选。默认为 location.href, 现在改为页面的标题https://hexo.io/zh-cn/docs/variables.html
+      owner: 'zichenlbl',
+      repo: 'discuss',
+      oauth: {
+        client_id: '41bf782a65aabaed603c',
+        client_secret: '008c8b70c4aa044a21d8752b9df92799dd327fef',
+      },
+    })
+    gitment.render('my-container')
+    </script>
+    
+    
+<nav id="article-nav">
+  
+    <a href="/2022/08/23/2022-08-23/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2022年08月23日
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/07/13/2022-07-13/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2022年07月13日</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NET/" rel="tag">.NET</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Download/" rel="tag">Download</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/" rel="tag">Life</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAT/" rel="tag">PAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Personal-website/" rel="tag">Personal website</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/NET/" style="font-size: 15px;">.NET</a> <a href="/tags/Download/" style="font-size: 15px;">Download</a> <a href="/tags/Life/" style="font-size: 20px;">Life</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/PAT/" style="font-size: 10px;">PAT</a> <a href="/tags/Personal-website/" style="font-size: 10px;">Personal website</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/03/30/2024-03-30/">2024年03月30日</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/16/2024-03-16/">2024年03月16日</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/09/2024-03-09/">2024年03月09日</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/07/2024-03-07/">2024年03月07日</a>
+          </li>
+        
+          <li>
+            <a href="/2024/03/02/2024-03-02/">2024年03月02日</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022-2024 Zichen<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> <a href="https://github.com/" target="_blank">Github</a> <a href="https://ibruce.info/" target="_blank">不蒜子</a> <br>
+      <span id="busuanzi_container_site_pv">本站总访问量 <span id="busuanzi_value_site_pv"></span> 次</span>
+      <span id="busuanzi_container_site_uv">本站访客数 <span id="busuanzi_value_site_uv"></span> 人次
+      <br/>
+      <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11000002000001" target="_blank">
+        <img width="13px" src="/css/images/gongan.png"/>
+        京公网安备 11000002000001 号
+      </a> &nbsp;
+      <a href="https://beian.miit.gov.cn/" target="_blank"> 京ICP证030173号 </a>
+      </span>
+      <br/>
+      建议您使用Edge、Chrome 80+、FireFox 86+、360极速模式等主流浏览器浏览本网站
+    </div>
+  </div>
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
