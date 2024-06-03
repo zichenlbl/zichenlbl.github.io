@@ -26,8 +26,6 @@
     <link rel="icon" href="/favicon.png">
   
   
-    <link href="//fonts.geekzu.org/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
   
 <link rel="stylesheet" href="/css/style.css">
 
@@ -108,27 +106,414 @@ var _hmt = _hmt || [];
 <p>路由：/Utilte</p>
 <span id="more"></span>
 
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (mCodeLeng &lt; <span class="number">4</span>)</span><br><span class="line">&#123;<span class="comment">//最小4位</span></span><br><span class="line">    mCodeLeng = <span class="number">4</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">string</span> mCode = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="built_in">byte</span>[] mData = CheckCodeByPicHelp.f_GetCode(mCodeLeng, <span class="keyword">ref</span> mCode); <span class="comment">//生成图像验证码</span></span><br><span class="line"><span class="keyword">if</span> (mData != <span class="literal">null</span>)</span><br><span class="line">&#123;</span><br><span class="line">    RedisHelper redis = <span class="keyword">new</span> RedisHelper(<span class="number">0</span>);     <span class="comment">//记录会话状态</span></span><br><span class="line">    <span class="built_in">string</span> mXWCodeStr = <span class="string">&quot;&quot;</span>;       <span class="comment">//验证码字段</span></span><br><span class="line">    <span class="built_in">string</span> mGUID = System.Guid.NewGuid().ToString();        <span class="comment">//获取当前guid</span></span><br><span class="line">    mXWCodeStr = XWSuperClass.S_XWCheckCodeByPIC_QZ + mGUID;       <span class="comment">//规则 前缀 + GUID</span></span><br><span class="line">    redis.StringSet(mXWCodeStr, mCode, TimeSpan.FromSeconds(XWSuperClass.S_XWCheckCodeTimeOUT));</span><br><span class="line">    RCheckCodeByPic mRCheckCodeByPic = <span class="keyword">new</span> RCheckCodeByPic()</span><br><span class="line">    &#123;</span><br><span class="line">        codeid = mGUID,</span><br><span class="line">        checkcodepic = Convert.ToBase64String(mData)</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> AjaxResult.Success(mRCheckCodeByPic, <span class="string">&quot;获取验证码成功&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c#">if (mCodeLeng &lt; 4)
+&#123;//最小4位
+    mCodeLeng = 4;
+&#125;
+string mCode = &quot;&quot;;
+byte[] mData = CheckCodeByPicHelp.f_GetCode(mCodeLeng, ref mCode); //生成图像验证码
+if (mData != null)
+&#123;
+    RedisHelper redis = new RedisHelper(0);     //记录会话状态
+    string mXWCodeStr = &quot;&quot;;       //验证码字段
+    string mGUID = System.Guid.NewGuid().ToString();        //获取当前guid
+    mXWCodeStr = XWSuperClass.S_XWCheckCodeByPIC_QZ + mGUID;       //规则 前缀 + GUID
+    redis.StringSet(mXWCodeStr, mCode, TimeSpan.FromSeconds(XWSuperClass.S_XWCheckCodeTimeOUT));
+    RCheckCodeByPic mRCheckCodeByPic = new RCheckCodeByPic()
+    &#123;
+        codeid = mGUID,
+        checkcodepic = Convert.ToBase64String(mData)
+    &#125;;
+    return AjaxResult.Success(mRCheckCodeByPic, &quot;获取验证码成功&quot;);
+&#125;
+</code></pre>
 <p>生成图像验证码：</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> System.Drawing;</span><br><span class="line"><span class="keyword">using</span> System.Drawing.Drawing2D;</span><br><span class="line"><span class="keyword">using</span> System.Drawing.Imaging;</span><br><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="keyword">using</span> System.Threading.Tasks;</span><br><span class="line"><span class="keyword">using</span> TIS.Utilte.Log;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">TIS.Utilte.CheckCode</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> 图像验证码</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CheckCodeByPicHelp</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span>  生成code</span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;len&quot;&gt;</span><span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">CreateValidateCode</span>(<span class="params"><span class="built_in">int</span> len</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 设置允许出现的字符</span></span><br><span class="line">            <span class="built_in">string</span> charStrs = <span class="string">&quot;dsadfjlwepqsdfkfhdkasrxfownds34566451346&quot;</span>;</span><br><span class="line">            Random random = <span class="keyword">new</span> Random();</span><br><span class="line">            <span class="comment">// 通过随机数生成code</span></span><br><span class="line">            <span class="built_in">string</span> code = String.Empty;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                code += charStrs[random.Next(charStrs.Length)];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> code;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> 生成code并提供两种方式存储 建议采用字节流存储</span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;code&quot;&gt;</span><span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Byte[] <span class="title">GenerateCode</span>(<span class="params"><span class="built_in">string</span> code</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 创建画板  设置宽度和高度 </span></span><br><span class="line">            Bitmap bitmap = <span class="keyword">new</span> Bitmap(code.Length * <span class="number">23</span>, <span class="number">47</span>);</span><br><span class="line">            <span class="comment">// 创建画笔</span></span><br><span class="line">            Graphics graphics = Graphics.FromImage(bitmap);</span><br><span class="line">            <span class="comment">// 给画布涂上背景</span></span><br><span class="line">            graphics.Clear(Color.White);</span><br><span class="line">            <span class="comment">// 设置颜料板和调色刷</span></span><br><span class="line">            RectangleF rectangleF = <span class="keyword">new</span> RectangleF(<span class="number">0</span>, <span class="number">0</span>, bitmap.Width, bitmap.Height);</span><br><span class="line">            Color[] mColors = &#123; Color.Red, Color.Yellow, Color.Blue, Color.Green,</span><br><span class="line">                Color.DarkBlue, Color.GreenYellow, Color.Black, Color.Purple &#125;;</span><br><span class="line">            Random random = <span class="keyword">new</span> Random();</span><br><span class="line">            Color mCodeColor = mColors[random.Next(mColors.Length)];</span><br><span class="line">            LinearGradientBrush linearGradientBrush = <span class="keyword">new</span> LinearGradientBrush(rectangleF, mCodeColor, Color.DarkBlue, <span class="number">1.2f</span>, <span class="literal">true</span>);</span><br><span class="line">            <span class="comment">// 设置需要画到图中文字的格式（字体，大小，是否加粗，斜体）</span></span><br><span class="line">            Font font = <span class="keyword">new</span> Font(<span class="string">&quot;Consolas&quot;</span>, <span class="number">22</span>, FontStyle.Bold | FontStyle.Italic);</span><br><span class="line">            <span class="comment">// 将 文字画到面板上</span></span><br><span class="line">            graphics.DrawString(code, font, linearGradientBrush, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 存储验证码</span></span><br><span class="line">            <span class="meta">#<span class="keyword">region</span> 存储法一 路径存储</span></span><br><span class="line">            <span class="comment">//bitmap.Save(&quot;code.jpg&quot;);</span></span><br><span class="line">            <span class="meta">#<span class="keyword">endregion</span></span></span><br><span class="line">            <span class="meta">#<span class="keyword">region</span> 存储法二 字节流存储</span></span><br><span class="line">            <span class="keyword">using</span> (MemoryStream stream = <span class="keyword">new</span> MemoryStream())</span><br><span class="line">            &#123;</span><br><span class="line">                bitmap.Save(stream, ImageFormat.Jpeg);</span><br><span class="line">                <span class="built_in">byte</span>[] mData = stream.ToArray();</span><br><span class="line">                bitmap.Dispose();</span><br><span class="line">                graphics.Dispose();</span><br><span class="line">                <span class="keyword">return</span> mData;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="meta">#<span class="keyword">endregion</span></span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> 生成图像验证码</span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;pCode&quot;&gt;</span><span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line">        <span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Byte[] <span class="title">f_GetCode</span>(<span class="params"><span class="built_in">int</span> pCodeLeng, <span class="keyword">ref</span> <span class="built_in">string</span> pCode</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">string</span> mCodeStr = CreateValidateCode(pCodeLeng);        <span class="comment">//生成一个验证码 abc4</span></span><br><span class="line">            <span class="built_in">byte</span>[] mData = GenerateCode(mCodeStr);      <span class="comment">//获取图像验证码</span></span><br><span class="line">            <span class="keyword">if</span> (mData != <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                pCode = mCodeStr;       <span class="comment">//获取验证码</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> mData;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="c#">using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using TIS.Utilte.Log;
 
+namespace TIS.Utilte.CheckCode
+&#123;
+    /// &lt;summary&gt;
+    /// 图像验证码
+    /// &lt;/summary&gt;
+    public class CheckCodeByPicHelp
+    &#123;
+        /// &lt;summary&gt;
+        ///  生成code
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;len&quot;&gt;&lt;/param&gt;
+        /// &lt;returns&gt;&lt;/returns&gt;
+        private static string CreateValidateCode(int len)
+        &#123;
+            // 设置允许出现的字符
+            string charStrs = &quot;dsadfjlwepqsdfkfhdkasrxfownds34566451346&quot;;
+            Random random = new Random();
+            // 通过随机数生成code
+            string code = String.Empty;
+            for (int i = 0; i &lt; len; i++)
+            &#123;
+                code += charStrs[random.Next(charStrs.Length)];
+            &#125;
+            return code;
+        &#125;
+
+        /// &lt;summary&gt;
+        /// 生成code并提供两种方式存储 建议采用字节流存储
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;code&quot;&gt;&lt;/param&gt;
+        /// &lt;returns&gt;&lt;/returns&gt;
+        private static Byte[] GenerateCode(string code)
+        &#123;
+            // 创建画板  设置宽度和高度 
+            Bitmap bitmap = new Bitmap(code.Length * 23, 47);
+            // 创建画笔
+            Graphics graphics = Graphics.FromImage(bitmap);
+            // 给画布涂上背景
+            graphics.Clear(Color.White);
+            // 设置颜料板和调色刷
+            RectangleF rectangleF = new RectangleF(0, 0, bitmap.Width, bitmap.Height);
+            Color[] mColors = &#123; Color.Red, Color.Yellow, Color.Blue, Color.Green,
+                Color.DarkBlue, Color.GreenYellow, Color.Black, Color.Purple &#125;;
+            Random random = new Random();
+            Color mCodeColor = mColors[random.Next(mColors.Length)];
+            LinearGradientBrush linearGradientBrush = new LinearGradientBrush(rectangleF, mCodeColor, Color.DarkBlue, 1.2f, true);
+            // 设置需要画到图中文字的格式（字体，大小，是否加粗，斜体）
+            Font font = new Font(&quot;Consolas&quot;, 22, FontStyle.Bold | FontStyle.Italic);
+            // 将 文字画到面板上
+            graphics.DrawString(code, font, linearGradientBrush, 0, 0);
+
+            // 存储验证码
+            #region 存储法一 路径存储
+            //bitmap.Save(&quot;code.jpg&quot;);
+            #endregion
+            #region 存储法二 字节流存储
+            using (MemoryStream stream = new MemoryStream())
+            &#123;
+                bitmap.Save(stream, ImageFormat.Jpeg);
+                byte[] mData = stream.ToArray();
+                bitmap.Dispose();
+                graphics.Dispose();
+                return mData;
+            &#125;
+            #endregion
+        &#125;
+
+        /// &lt;summary&gt;
+        /// 生成图像验证码
+        /// &lt;/summary&gt;
+        /// &lt;param name=&quot;pCode&quot;&gt;&lt;/param&gt;
+        /// &lt;returns&gt;&lt;/returns&gt;
+        public static Byte[] f_GetCode(int pCodeLeng, ref string pCode)
+        &#123;
+            string mCodeStr = CreateValidateCode(pCodeLeng);        //生成一个验证码 abc4
+            byte[] mData = GenerateCode(mCodeStr);      //获取图像验证码
+            if (mData != null)
+            &#123;
+                pCode = mCodeStr;       //获取验证码
+            &#125;
+            return mData;
+        &#125;
+
+    &#125;
+&#125;
+</code></pre>
 <p>返回数据：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;s_ErrCode&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;获取验证码成功&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;codeid&quot;</span><span class="punctuation">:</span> <span class="string">&quot;11ecc80d-0f0b-49f5-8678-201f6768ce3e&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;checkcodepic&quot;</span><span class="punctuation">:</span> <span class="string">&quot;/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHB......&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="json">  &#123;
+  &quot;s_ErrCode&quot;: 0,
+  &quot;message&quot;: &quot;获取验证码成功&quot;,
+  &quot;data&quot;: &#123;
+    &quot;codeid&quot;: &quot;11ecc80d-0f0b-49f5-8678-201f6768ce3e&quot;,
+    &quot;checkcodepic&quot;: &quot;/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHB......&quot;
+  &#125;
+&#125;
+</code></pre>
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><pre><code class="c#">string mCheckCodeId = pJsonValue[&quot;checkcode_id&quot;].ToString();        //验证码id
+string mCheckCode = pJsonValue[&quot;checkcode&quot;].ToString();        //验证码
+RedisHelper redis = new RedisHelper(0);     //记录会话状态
+string mXWCheckCodeIdKey = XWSuperClass.S_XWCheckCodeByPIC_QZ + mCheckCodeId;      //获取会话id
+string mGetCheckCodeStr = redis.StringGet(mXWCheckCodeIdKey);     //获取checkcode
+redis.KeyDelete(mXWCheckCodeIdKey);     //验证成功后删除
+if (string.IsNullOrEmpty(mGetCheckCodeStr))
+&#123;
+    return AjaxResult.Error(&quot;验证码错误&quot;, AjaxResult.ErrCode.CheckCodeErr);
+&#125;
+if (mGetCheckCodeStr != mCheckCode)
+&#123;
+    return AjaxResult.Error(&quot;验证码错误&quot;, AjaxResult.ErrCode.CheckCodeErr);
+&#125;
 
-<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> mCheckCodeId = pJsonValue[<span class="string">&quot;checkcode_id&quot;</span>].ToString();        <span class="comment">//验证码id</span></span><br><span class="line"><span class="built_in">string</span> mCheckCode = pJsonValue[<span class="string">&quot;checkcode&quot;</span>].ToString();        <span class="comment">//验证码</span></span><br><span class="line">RedisHelper redis = <span class="keyword">new</span> RedisHelper(<span class="number">0</span>);     <span class="comment">//记录会话状态</span></span><br><span class="line"><span class="built_in">string</span> mXWCheckCodeIdKey = XWSuperClass.S_XWCheckCodeByPIC_QZ + mCheckCodeId;      <span class="comment">//获取会话id</span></span><br><span class="line"><span class="built_in">string</span> mGetCheckCodeStr = redis.StringGet(mXWCheckCodeIdKey);     <span class="comment">//获取checkcode</span></span><br><span class="line">redis.KeyDelete(mXWCheckCodeIdKey);     <span class="comment">//验证成功后删除</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">string</span>.IsNullOrEmpty(mGetCheckCodeStr))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> AjaxResult.Error(<span class="string">&quot;验证码错误&quot;</span>, AjaxResult.ErrCode.CheckCodeErr);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (mGetCheckCodeStr != mCheckCode)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> AjaxResult.Error(<span class="string">&quot;验证码错误&quot;</span>, AjaxResult.ErrCode.CheckCodeErr);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mUserPwd = CodeHelp.f_GetMD5Hash32(mUserPwd);</span><br><span class="line"><span class="comment"><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span>查询数据<span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span></span></span><br><span class="line">IQuery&lt;xwtis_sys_user&gt; m_q_sysuser = context.Query&lt;xwtis_sys_user&gt;();       <span class="comment">//获取xwtis_sys_user表数据</span></span><br><span class="line"><span class="keyword">var</span> mGetSysUser = m_q_sysuser.Where(a =&gt; a.user_code == mUserName &amp;&amp;</span><br><span class="line">                                    a.user_status == <span class="string">&quot;1&quot;</span>).Select(a =&gt; <span class="keyword">new</span></span><br><span class="line">                                                                 &#123;</span><br><span class="line">                                                                     a.iid,</span><br><span class="line">                                                                     a.user_code,</span><br><span class="line">                                                                     a.user_name,</span><br><span class="line">                                                                     a.user_pwd</span><br><span class="line">                                                                 &#125;).FirstOrDefault();</span><br><span class="line"><span class="keyword">if</span> (mGetSysUser == <span class="literal">null</span> || mGetSysUser.user_pwd != mUserPwd)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> AjaxResult.Error(<span class="string">&quot;用户名或密码错误&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">mUserId = mGetSysUser.iid.ToString();      <span class="comment">//获取用户id</span></span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span>返回数据<span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span></span></span><br><span class="line">TokenUserInfo mUserInfo = <span class="keyword">new</span> TokenUserInfo();</span><br><span class="line">mUserInfo.S_UserId = mUserId;        <span class="comment">//用户id</span></span><br><span class="line">mUserInfo.S_UserCode = mGetSysUser.user_code;     <span class="comment">//用户编码</span></span><br><span class="line">mUserInfo.S_UserName = mGetSysUser.user_name;     <span class="comment">//用户名称</span></span><br><span class="line"><span class="built_in">string</span> mGetTokenErr = <span class="string">&quot;&quot;</span>;       <span class="comment">//获取Toke错误信息</span></span><br><span class="line"><span class="built_in">string</span> mToke = TokenHelp.f_GetToken(mUserInfo, <span class="keyword">ref</span> mGetTokenErr);       <span class="comment">//获取登录Token</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">string</span>.IsNullOrEmpty(mGetTokenErr))</span><br><span class="line">&#123;</span><br><span class="line">    LogManager.WriteLog(<span class="string">&quot;登录异常 获取令牌异常 &quot;</span> + mGetTokenErr);</span><br><span class="line">    <span class="keyword">return</span> AjaxResult.Error(<span class="string">&quot;登录异常 获取令牌异常&quot;</span>, AjaxResult.ErrCode.Err);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">string</span> mXWSessionId = <span class="string">&quot;&quot;</span>;       <span class="comment">//会话key</span></span><br><span class="line"><span class="built_in">string</span> mGUID = System.Guid.NewGuid().ToString();        <span class="comment">//获取当前guid</span></span><br><span class="line">mXWSessionId = XWSuperClass.S_XWSessionId_Qz + mGUID;       <span class="comment">//规则 前缀 + GUID</span></span><br><span class="line">redis.StringSet(mXWSessionId, DateTime.Now.ToString(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>), TimeSpan.FromSeconds(XWSuperClass.S_XWSessionTimeOUT));</span><br><span class="line">RUserTokenInfo mRUserTokenInfo = <span class="keyword">new</span> RUserTokenInfo()</span><br><span class="line">&#123;</span><br><span class="line">    user_id = mUserId,      <span class="comment">//用户名</span></span><br><span class="line">    token = mToke,       <span class="comment">//登录token</span></span><br><span class="line">    xwsessionid = mGUID      <span class="comment">//会话id</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">return</span> AjaxResult.Success(mRUserTokenInfo, <span class="string">&quot;登录成功&quot;</span>);</span><br></pre></td></tr></table></figure>
+mUserPwd = CodeHelp.f_GetMD5Hash32(mUserPwd);
+///////////////////////////查询数据///////////////////////////
+IQuery&lt;xwtis_sys_user&gt; m_q_sysuser = context.Query&lt;xwtis_sys_user&gt;();       //获取xwtis_sys_user表数据
+var mGetSysUser = m_q_sysuser.Where(a =&gt; a.user_code == mUserName &amp;&amp;
+                                    a.user_status == &quot;1&quot;).Select(a =&gt; new
+                                                                 &#123;
+                                                                     a.iid,
+                                                                     a.user_code,
+                                                                     a.user_name,
+                                                                     a.user_pwd
+                                                                 &#125;).FirstOrDefault();
+if (mGetSysUser == null || mGetSysUser.user_pwd != mUserPwd)
+&#123;
+    return AjaxResult.Error(&quot;用户名或密码错误&quot;);
+&#125;
+mUserId = mGetSysUser.iid.ToString();      //获取用户id
 
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">调用示例</span><br><span class="line"></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;header&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;actionname&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Login&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;body&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;user_name&quot;</span><span class="punctuation">:</span><span class="string">&quot;se&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;user_pwd&quot;</span><span class="punctuation">:</span><span class="string">&quot;测试&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;checkcode_id&quot;</span><span class="punctuation">:</span><span class="string">&quot;2403f6e6-b5b0-43c9-919f-d47c6bc5553b&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;checkcode&quot;</span><span class="punctuation">:</span><span class="string">&quot;h5s6&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line">返回示例</span><br><span class="line"></span><br><span class="line">  <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;s_ErrCode&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;message&quot;</span><span class="punctuation">:</span> <span class="string">&quot;登录成功&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;user_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;001&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;token&quot;</span><span class="punctuation">:</span> <span class="string">&quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e......&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;xwsessionid&quot;</span><span class="punctuation">:</span> <span class="string">&quot;4a57cdbd-3e91-4a05-ba65-aef5d5300c20&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+///////////////////////////返回数据///////////////////////////
+TokenUserInfo mUserInfo = new TokenUserInfo();
+mUserInfo.S_UserId = mUserId;        //用户id
+mUserInfo.S_UserCode = mGetSysUser.user_code;     //用户编码
+mUserInfo.S_UserName = mGetSysUser.user_name;     //用户名称
+string mGetTokenErr = &quot;&quot;;       //获取Toke错误信息
+string mToke = TokenHelp.f_GetToken(mUserInfo, ref mGetTokenErr);       //获取登录Token
+if (!string.IsNullOrEmpty(mGetTokenErr))
+&#123;
+    LogManager.WriteLog(&quot;登录异常 获取令牌异常 &quot; + mGetTokenErr);
+    return AjaxResult.Error(&quot;登录异常 获取令牌异常&quot;, AjaxResult.ErrCode.Err);
+&#125;
+string mXWSessionId = &quot;&quot;;       //会话key
+string mGUID = System.Guid.NewGuid().ToString();        //获取当前guid
+mXWSessionId = XWSuperClass.S_XWSessionId_Qz + mGUID;       //规则 前缀 + GUID
+redis.StringSet(mXWSessionId, DateTime.Now.ToString(&quot;yyyy-MM-dd HH:mm:ss&quot;), TimeSpan.FromSeconds(XWSuperClass.S_XWSessionTimeOUT));
+RUserTokenInfo mRUserTokenInfo = new RUserTokenInfo()
+&#123;
+    user_id = mUserId,      //用户名
+    token = mToke,       //登录token
+    xwsessionid = mGUID      //会话id
+&#125;;
+return AjaxResult.Success(mRUserTokenInfo, &quot;登录成功&quot;);
+</code></pre>
+<pre><code class="json">调用示例
 
-<h2 id="刷新token"><a href="#刷新token" class="headerlink" title="刷新token"></a>刷新token</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">TokenUserInfo mUserInfo = <span class="keyword">new</span> TokenUserInfo();</span><br><span class="line">mUserInfo.S_UserId = pJsonValue[<span class="string">&quot;user_id&quot;</span>].ToString();        <span class="comment">//用户编码</span></span><br><span class="line">mUserInfo.S_UserName = pJsonValue[<span class="string">&quot;user_name&quot;</span>].ToString();     <span class="comment">//用户名称</span></span><br><span class="line"><span class="built_in">string</span> mGetTokenErr = <span class="string">&quot;&quot;</span>;       <span class="comment">//获取Toke错误信息</span></span><br><span class="line"><span class="built_in">string</span> mToke = TokenHelp.f_GetToken(mUserInfo, <span class="keyword">ref</span> mGetTokenErr);       <span class="comment">//获取登录Token</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">string</span>.IsNullOrEmpty(mGetTokenErr))</span><br><span class="line">&#123;</span><br><span class="line">    LogManager.WriteLog(<span class="string">&quot;登录异常 获取令牌异常 &quot;</span> + mGetTokenErr);</span><br><span class="line">    <span class="keyword">return</span> AjaxResult.Error(<span class="string">&quot;登录异常 获取令牌异常&quot;</span>, AjaxResult.ErrCode.Err);</span><br><span class="line">&#125;</span><br><span class="line">JObject mJObject = <span class="keyword">new</span> JObject();</span><br><span class="line">mJObject[<span class="string">&quot;token&quot;</span>] = mToke;      <span class="comment">//Token</span></span><br><span class="line"><span class="keyword">return</span> AjaxResult.Success(mJObject, <span class="string">&quot;刷新token成功&quot;</span>);</span><br></pre></td></tr></table></figure>
+&#123;
+    &quot;header&quot;: &#123;
+        &quot;actionname&quot;: &quot;Login&quot;
+    &#125;,
+    &quot;body&quot;: &#123;
+        &quot;user_name&quot;:&quot;se&quot;,
+        &quot;user_pwd&quot;:&quot;测试&quot;,
+        &quot;checkcode_id&quot;:&quot;2403f6e6-b5b0-43c9-919f-d47c6bc5553b&quot;,
+        &quot;checkcode&quot;:&quot;h5s6&quot;
+    &#125;
+&#125;
+返回示例
 
-<h2 id="获取菜单和用户权限"><a href="#获取菜单和用户权限" class="headerlink" title="获取菜单和用户权限"></a>获取菜单和用户权限</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (f_IsArgeNullOrEmpty(pJsonValue, <span class="string">&quot;user_id&quot;</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> AjaxResult.Error(<span class="string">&quot;登录参数不正确&quot;</span>, AjaxResult.ErrCode.Err);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">int</span> mUserId = <span class="number">-1</span>;       <span class="comment">//用户id</span></span><br><span class="line"><span class="built_in">string</span> mInstitutionCode = <span class="string">&quot;&quot;</span>;       <span class="comment">//机构编码</span></span><br><span class="line"><span class="built_in">string</span> mInstitutionName = <span class="string">&quot;&quot;</span>;       <span class="comment">//机构名称</span></span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    mUserId = Convert.ToInt32(pJsonValue[<span class="string">&quot;user_id&quot;</span>].ToString());</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> AjaxResult.Error(<span class="string">&quot;登录参数不正确&quot;</span>, AjaxResult.ErrCode.Err);</span><br><span class="line">&#125;</span><br><span class="line">List&lt;<span class="built_in">string</span>&gt; mAidList = <span class="keyword">new</span> List&lt;<span class="built_in">string</span>&gt;();     <span class="comment">//所有AID集合</span></span><br><span class="line">MySqlContext context = <span class="keyword">new</span> MySqlContext(<span class="keyword">new</span> MySqlConnectionFactory(SuperConClass.S_MPIDBICPCConStr));</span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment"><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span>获取用户机构和角色<span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span></span></span><br><span class="line">    <span class="keyword">var</span> mGetUserInstitution = context.JoinQuery&lt;xwtis_sys_user_institution, xwtis_sys_institution&gt;((user_institution, institution) =&gt; <span class="keyword">new</span> <span class="built_in">object</span>[]</span><br><span class="line">                                                                                                   &#123;</span><br><span class="line">                                                                                                       JoinType.LeftJoin, user_institution.institution_code == institution.institution_code,          <span class="comment">/* 表 xwtis_sys_user_institution 和 xwtis_sys_institution 进行Left连接 */</span></span><br><span class="line">                                                                                                   &#125;)</span><br><span class="line">        .Select((user_institution, institution) =&gt; <span class="keyword">new</span></span><br><span class="line">                &#123;</span><br><span class="line">                    institution.institution_code,</span><br><span class="line">                    institution.institution_name,</span><br><span class="line">                    user_institution.user_iid</span><br><span class="line">                &#125;)</span><br><span class="line">        .Where(a =&gt; a.user_iid == mUserId)</span><br><span class="line">        .FirstOrDefault();      <span class="comment">//默认只有一个机构</span></span><br><span class="line">    <span class="comment"><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span>获取菜单权限<span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span></span></span><br><span class="line">    List&lt;RActionClass&gt; mNodes = <span class="keyword">new</span> List&lt;RActionClass&gt;();</span><br><span class="line">    <span class="keyword">if</span> (mGetUserInstitution != <span class="literal">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        mInstitutionCode = mGetUserInstitution.institution_code;        <span class="comment">//机构编码</span></span><br><span class="line">        mInstitutionName = mGetUserInstitution.institution_name;        <span class="comment">//机构名称</span></span><br><span class="line">        <span class="keyword">var</span> mGetAction_menu = context.JoinQuery&lt;xwtis_sys_user_institution, xwtis_sys_role_action, xwtis_sys_action&gt;((user_institution, role_action, action) =&gt; <span class="keyword">new</span> <span class="built_in">object</span>[]</span><br><span class="line">                                                                                                                     &#123;</span><br><span class="line">                                                                                                                         JoinType.LeftJoin, user_institution.role_iid == role_action.role_iid,          <span class="comment">/* 表 xwtis_sys_user_institution 和 xwtis_sys_role_action 进行Left连接 */</span></span><br><span class="line">                                                                                                                             JoinType.LeftJoin, role_action.action_iid == action.iid          <span class="comment">/* 表 xwtis_sys_role_action 和 xwtis_sys_action 进行Left连接 */</span></span><br><span class="line">                                                                                                                     &#125;)</span><br><span class="line">            .Select((user_institution, role_action, action) =&gt; <span class="keyword">new</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        user_id = user_institution.iid,</span><br><span class="line">                        user_institution.institution_code,</span><br><span class="line">                        action.actiontype,</span><br><span class="line">                        action_id = action.aid,</span><br><span class="line">                        action.paid,</span><br><span class="line">                        action.path,</span><br><span class="line">                        action.component,</span><br><span class="line">                        action.redirect,</span><br><span class="line">                        action.adescribe,</span><br><span class="line">                        action.icopath,</span><br><span class="line">                        action.isvisible,</span><br><span class="line">                        action.sys_type,</span><br><span class="line">                        action.sortid</span><br><span class="line">                    &#125;)</span><br><span class="line">            .Where(a =&gt; a.user_id == mUserId &amp;&amp; a.institution_code == mInstitutionCode</span><br><span class="line">                   &amp;&amp; a.actiontype == <span class="string">&quot;W&quot;</span> &amp;&amp; a.isvisible == <span class="string">&quot;Y&quot;</span>)</span><br><span class="line">            .OrderBy(a =&gt; a.sortid).ToList();</span><br><span class="line">        <span class="comment">//获取所有子项</span></span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">var</span> mMenuItem <span class="keyword">in</span> mGetAction_menu)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!mAidList.Contains(mMenuItem.action_id.ToString()))</span><br><span class="line">            &#123;<span class="comment">//添加权限</span></span><br><span class="line">                mAidList.Add(mMenuItem.action_id.ToString());</span><br><span class="line">            &#125;</span><br><span class="line">            mNodes.Add(<span class="keyword">new</span> RActionClass()</span><br><span class="line">                       &#123;</span><br><span class="line">                           id = mMenuItem.action_id.ToString(),</span><br><span class="line">                           pid = mMenuItem.paid.ToString(),</span><br><span class="line">                           path = mMenuItem.path,</span><br><span class="line">                           component = mMenuItem.component,</span><br><span class="line">                           redirect = mMenuItem.redirect,</span><br><span class="line">                           name = mMenuItem.action_id.ToString(),</span><br><span class="line">                           meta = <span class="keyword">new</span> RMeta()</span><br><span class="line">                           &#123;</span><br><span class="line">                               title = mMenuItem.adescribe,</span><br><span class="line">                               icon = mMenuItem.icopath,</span><br><span class="line">                               roles = <span class="keyword">new</span> <span class="built_in">string</span>[] &#123; mUserId.ToString() &#125;</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span>获取用户权限<span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span><span class="doctag">///</span></span></span><br><span class="line">    List&lt;RActionUserClass&gt; mNode_Users = <span class="keyword">new</span> List&lt;RActionUserClass&gt;();</span><br><span class="line">    <span class="keyword">if</span> (mGetUserInstitution != <span class="literal">null</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        mInstitutionCode = mGetUserInstitution.institution_code;        <span class="comment">//机构编码</span></span><br><span class="line">        mInstitutionName = mGetUserInstitution.institution_name;        <span class="comment">//机构名称</span></span><br><span class="line">        <span class="keyword">var</span> mGetAction_User = context.JoinQuery&lt;xwtis_sys_user_institution, xwtis_sys_role_action, xwtis_sys_action&gt;((user_institution, role_action, action) =&gt; <span class="keyword">new</span> <span class="built_in">object</span>[]</span><br><span class="line">                                                                                                                     &#123;</span><br><span class="line">                                                                                                                         JoinType.LeftJoin, user_institution.role_iid == role_action.role_iid,          <span class="comment">/* 表 xwtis_sys_user_institution 和 xwtis_sys_role_action 进行Left连接 */</span></span><br><span class="line">                                                                                                                             JoinType.LeftJoin, role_action.action_iid == action.iid          <span class="comment">/* 表 xwtis_sys_role_action 和 xwtis_sys_action 进行Left连接 */</span></span><br><span class="line">                                                                                                                     &#125;)</span><br><span class="line">            .Select((user_institution, role_action, action) =&gt; <span class="keyword">new</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        user_id = user_institution.iid,</span><br><span class="line">                        user_institution.institution_code,</span><br><span class="line">                        action.actiontype,</span><br><span class="line">                        action_id = action.aid,</span><br><span class="line">                        action.paid,</span><br><span class="line">                        action.path,</span><br><span class="line">                        action.component,</span><br><span class="line">                        action.redirect,</span><br><span class="line">                        action.adescribe,</span><br><span class="line">                        action.icopath,</span><br><span class="line">                        action.isvisible,</span><br><span class="line">                        action.sys_type,</span><br><span class="line">                        action.edit_type,</span><br><span class="line">                        action.sortid</span><br><span class="line">                    &#125;)</span><br><span class="line">            .Where(a =&gt; a.user_id == mUserId &amp;&amp; a.institution_code == mInstitutionCode</span><br><span class="line">                   &amp;&amp; a.actiontype == <span class="string">&quot;A&quot;</span> &amp;&amp; a.isvisible == <span class="string">&quot;Y&quot;</span>)</span><br><span class="line">            .OrderBy(a =&gt; a.sortid).OrderBy(a =&gt; a.sortid).ToList();</span><br><span class="line">        <span class="comment">//获取所有子项</span></span><br><span class="line">        <span class="keyword">foreach</span> (<span class="keyword">var</span> mMenuItem <span class="keyword">in</span> mGetAction_User)</span><br><span class="line">        &#123;</span><br><span class="line">            RActionUserClass mRActionUserClass = <span class="keyword">new</span> RActionUserClass();</span><br><span class="line">            mRActionUserClass.aid = mMenuItem.action_id.ToString();</span><br><span class="line">            mRActionUserClass.title = mMenuItem.adescribe;</span><br><span class="line">            <span class="keyword">switch</span> (mMenuItem.edit_type)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;1&quot;</span>:</span><br><span class="line">                    mRActionUserClass.edittype = RActionUserClass.EditType.显示;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;-1&quot;</span>:</span><br><span class="line">                    mRActionUserClass.edittype = RActionUserClass.EditType.隐藏;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&quot;-2&quot;</span>:</span><br><span class="line">                    mRActionUserClass.edittype = RActionUserClass.EditType.不可编辑;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            mNode_Users.Add(mRActionUserClass);</span><br><span class="line">            <span class="keyword">if</span> (mMenuItem.edit_type != <span class="string">&quot;-1&quot;</span> &amp;&amp; mMenuItem.edit_type != <span class="string">&quot;-2&quot;</span>)</span><br><span class="line">            &#123;<span class="comment">//隐藏和不可编辑到没有权限</span></span><br><span class="line">                <span class="keyword">if</span> (!mAidList.Contains(mMenuItem.action_id.ToString()))</span><br><span class="line">                &#123;</span><br><span class="line">                    mAidList.Add(mMenuItem.action_id.ToString());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    RedisHelper redis = <span class="keyword">new</span> RedisHelper(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">string</span> mActionKey = XWSuperClass.S_XWActionList_QZ + mUserId.ToString();</span><br><span class="line">    <span class="built_in">string</span> mAids = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="built_in">string</span> mAid <span class="keyword">in</span> mAidList)</span><br><span class="line">    &#123;</span><br><span class="line">        mAids += mAid + <span class="string">&quot;,&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">string</span>.IsNullOrEmpty(mAids))</span><br><span class="line">    &#123;</span><br><span class="line">        mAids = mAids.Substring(<span class="number">0</span>, mAids.Length - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    redis.StringSet(mActionKey, mAids);     <span class="comment">//权限记录</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//生成对应树形对象</span></span><br><span class="line">    List&lt;RActionClass&gt; mActionClassList = ActionTreeClass.f_CreateMenu_Auto(mNodes);</span><br><span class="line"></span><br><span class="line">    RActions mRActions = <span class="keyword">new</span> RActions();</span><br><span class="line">    mRActions.institution_code = mInstitutionCode;      <span class="comment">//机构编码</span></span><br><span class="line">    mRActions.institution_name = mInstitutionName;      <span class="comment">//机构名称</span></span><br><span class="line">    mRActions.actionmenu = mActionClassList;        <span class="comment">//菜单权限</span></span><br><span class="line">    mRActions.actionuser = mNode_Users;     <span class="comment">//按钮功能权限</span></span><br><span class="line">    <span class="keyword">return</span> AjaxResult.Success(mRActions, <span class="string">&quot;权限获取成功&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (Exception ex)</span><br><span class="line">&#123;</span><br><span class="line">    LogManager.WriteLog(<span class="string">&quot;获取权限异常:&quot;</span> + ex.Message);</span><br><span class="line">    <span class="keyword">return</span> AjaxResult.Error(<span class="string">&quot;获取权限异常&quot;</span>, AjaxResult.ErrCode.ServerErr);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">finally</span></span><br><span class="line">&#123;</span><br><span class="line">    context.Dispose();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  &#123;
+  &quot;s_ErrCode&quot;: 0,
+  &quot;message&quot;: &quot;登录成功&quot;,
+  &quot;data&quot;: &#123;
+    &quot;user_id&quot;: &quot;001&quot;,
+    &quot;token&quot;: &quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e......&quot;,
+    &quot;xwsessionid&quot;: &quot;4a57cdbd-3e91-4a05-ba65-aef5d5300c20&quot;
+  &#125;
+&#125;
+</code></pre>
+<h2 id="刷新token"><a href="#刷新token" class="headerlink" title="刷新token"></a>刷新token</h2><pre><code class="c#">TokenUserInfo mUserInfo = new TokenUserInfo();
+mUserInfo.S_UserId = pJsonValue[&quot;user_id&quot;].ToString();        //用户编码
+mUserInfo.S_UserName = pJsonValue[&quot;user_name&quot;].ToString();     //用户名称
+string mGetTokenErr = &quot;&quot;;       //获取Toke错误信息
+string mToke = TokenHelp.f_GetToken(mUserInfo, ref mGetTokenErr);       //获取登录Token
+if (!string.IsNullOrEmpty(mGetTokenErr))
+&#123;
+    LogManager.WriteLog(&quot;登录异常 获取令牌异常 &quot; + mGetTokenErr);
+    return AjaxResult.Error(&quot;登录异常 获取令牌异常&quot;, AjaxResult.ErrCode.Err);
+&#125;
+JObject mJObject = new JObject();
+mJObject[&quot;token&quot;] = mToke;      //Token
+return AjaxResult.Success(mJObject, &quot;刷新token成功&quot;);
+</code></pre>
+<h2 id="获取菜单和用户权限"><a href="#获取菜单和用户权限" class="headerlink" title="获取菜单和用户权限"></a>获取菜单和用户权限</h2><pre><code class="c#">if (f_IsArgeNullOrEmpty(pJsonValue, &quot;user_id&quot;))
+&#123;
+    return AjaxResult.Error(&quot;登录参数不正确&quot;, AjaxResult.ErrCode.Err);
+&#125;
+int mUserId = -1;       //用户id
+string mInstitutionCode = &quot;&quot;;       //机构编码
+string mInstitutionName = &quot;&quot;;       //机构名称
+try
+&#123;
+    mUserId = Convert.ToInt32(pJsonValue[&quot;user_id&quot;].ToString());
+&#125;
+catch
+&#123;
+    return AjaxResult.Error(&quot;登录参数不正确&quot;, AjaxResult.ErrCode.Err);
+&#125;
+List&lt;string&gt; mAidList = new List&lt;string&gt;();     //所有AID集合
+MySqlContext context = new MySqlContext(new MySqlConnectionFactory(SuperConClass.S_MPIDBICPCConStr));
+try
+&#123;
+    ///////////////////////////获取用户机构和角色///////////////////////////
+    var mGetUserInstitution = context.JoinQuery&lt;xwtis_sys_user_institution, xwtis_sys_institution&gt;((user_institution, institution) =&gt; new object[]
+                                                                                                   &#123;
+                                                                                                       JoinType.LeftJoin, user_institution.institution_code == institution.institution_code,          /* 表 xwtis_sys_user_institution 和 xwtis_sys_institution 进行Left连接 */
+                                                                                                   &#125;)
+        .Select((user_institution, institution) =&gt; new
+                &#123;
+                    institution.institution_code,
+                    institution.institution_name,
+                    user_institution.user_iid
+                &#125;)
+        .Where(a =&gt; a.user_iid == mUserId)
+        .FirstOrDefault();      //默认只有一个机构
+    ///////////////////////////获取菜单权限///////////////////////////
+    List&lt;RActionClass&gt; mNodes = new List&lt;RActionClass&gt;();
+    if (mGetUserInstitution != null)
+    &#123;
+        mInstitutionCode = mGetUserInstitution.institution_code;        //机构编码
+        mInstitutionName = mGetUserInstitution.institution_name;        //机构名称
+        var mGetAction_menu = context.JoinQuery&lt;xwtis_sys_user_institution, xwtis_sys_role_action, xwtis_sys_action&gt;((user_institution, role_action, action) =&gt; new object[]
+                                                                                                                     &#123;
+                                                                                                                         JoinType.LeftJoin, user_institution.role_iid == role_action.role_iid,          /* 表 xwtis_sys_user_institution 和 xwtis_sys_role_action 进行Left连接 */
+                                                                                                                             JoinType.LeftJoin, role_action.action_iid == action.iid          /* 表 xwtis_sys_role_action 和 xwtis_sys_action 进行Left连接 */
+                                                                                                                     &#125;)
+            .Select((user_institution, role_action, action) =&gt; new
+                    &#123;
+                        user_id = user_institution.iid,
+                        user_institution.institution_code,
+                        action.actiontype,
+                        action_id = action.aid,
+                        action.paid,
+                        action.path,
+                        action.component,
+                        action.redirect,
+                        action.adescribe,
+                        action.icopath,
+                        action.isvisible,
+                        action.sys_type,
+                        action.sortid
+                    &#125;)
+            .Where(a =&gt; a.user_id == mUserId &amp;&amp; a.institution_code == mInstitutionCode
+                   &amp;&amp; a.actiontype == &quot;W&quot; &amp;&amp; a.isvisible == &quot;Y&quot;)
+            .OrderBy(a =&gt; a.sortid).ToList();
+        //获取所有子项
+        foreach (var mMenuItem in mGetAction_menu)
+        &#123;
+            if (!mAidList.Contains(mMenuItem.action_id.ToString()))
+            &#123;//添加权限
+                mAidList.Add(mMenuItem.action_id.ToString());
+            &#125;
+            mNodes.Add(new RActionClass()
+                       &#123;
+                           id = mMenuItem.action_id.ToString(),
+                           pid = mMenuItem.paid.ToString(),
+                           path = mMenuItem.path,
+                           component = mMenuItem.component,
+                           redirect = mMenuItem.redirect,
+                           name = mMenuItem.action_id.ToString(),
+                           meta = new RMeta()
+                           &#123;
+                               title = mMenuItem.adescribe,
+                               icon = mMenuItem.icopath,
+                               roles = new string[] &#123; mUserId.ToString() &#125;
+                           &#125;
+                       &#125;);
+        &#125;
+    &#125;
 
+    ///////////////////////////获取用户权限///////////////////////////
+    List&lt;RActionUserClass&gt; mNode_Users = new List&lt;RActionUserClass&gt;();
+    if (mGetUserInstitution != null)
+    &#123;
+        mInstitutionCode = mGetUserInstitution.institution_code;        //机构编码
+        mInstitutionName = mGetUserInstitution.institution_name;        //机构名称
+        var mGetAction_User = context.JoinQuery&lt;xwtis_sys_user_institution, xwtis_sys_role_action, xwtis_sys_action&gt;((user_institution, role_action, action) =&gt; new object[]
+                                                                                                                     &#123;
+                                                                                                                         JoinType.LeftJoin, user_institution.role_iid == role_action.role_iid,          /* 表 xwtis_sys_user_institution 和 xwtis_sys_role_action 进行Left连接 */
+                                                                                                                             JoinType.LeftJoin, role_action.action_iid == action.iid          /* 表 xwtis_sys_role_action 和 xwtis_sys_action 进行Left连接 */
+                                                                                                                     &#125;)
+            .Select((user_institution, role_action, action) =&gt; new
+                    &#123;
+                        user_id = user_institution.iid,
+                        user_institution.institution_code,
+                        action.actiontype,
+                        action_id = action.aid,
+                        action.paid,
+                        action.path,
+                        action.component,
+                        action.redirect,
+                        action.adescribe,
+                        action.icopath,
+                        action.isvisible,
+                        action.sys_type,
+                        action.edit_type,
+                        action.sortid
+                    &#125;)
+            .Where(a =&gt; a.user_id == mUserId &amp;&amp; a.institution_code == mInstitutionCode
+                   &amp;&amp; a.actiontype == &quot;A&quot; &amp;&amp; a.isvisible == &quot;Y&quot;)
+            .OrderBy(a =&gt; a.sortid).OrderBy(a =&gt; a.sortid).ToList();
+        //获取所有子项
+        foreach (var mMenuItem in mGetAction_User)
+        &#123;
+            RActionUserClass mRActionUserClass = new RActionUserClass();
+            mRActionUserClass.aid = mMenuItem.action_id.ToString();
+            mRActionUserClass.title = mMenuItem.adescribe;
+            switch (mMenuItem.edit_type)
+            &#123;
+                case &quot;1&quot;:
+                    mRActionUserClass.edittype = RActionUserClass.EditType.显示;
+                    break;
+                case &quot;-1&quot;:
+                    mRActionUserClass.edittype = RActionUserClass.EditType.隐藏;
+                    break;
+                case &quot;-2&quot;:
+                    mRActionUserClass.edittype = RActionUserClass.EditType.不可编辑;
+                    break;
+            &#125;
+            mNode_Users.Add(mRActionUserClass);
+            if (mMenuItem.edit_type != &quot;-1&quot; &amp;&amp; mMenuItem.edit_type != &quot;-2&quot;)
+            &#123;//隐藏和不可编辑到没有权限
+                if (!mAidList.Contains(mMenuItem.action_id.ToString()))
+                &#123;
+                    mAidList.Add(mMenuItem.action_id.ToString());
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+
+    RedisHelper redis = new RedisHelper(0);
+    string mActionKey = XWSuperClass.S_XWActionList_QZ + mUserId.ToString();
+    string mAids = &quot;&quot;;
+    foreach (string mAid in mAidList)
+    &#123;
+        mAids += mAid + &quot;,&quot;;
+    &#125;
+    if (!string.IsNullOrEmpty(mAids))
+    &#123;
+        mAids = mAids.Substring(0, mAids.Length - 1);
+    &#125;
+    redis.StringSet(mActionKey, mAids);     //权限记录
+
+    //生成对应树形对象
+    List&lt;RActionClass&gt; mActionClassList = ActionTreeClass.f_CreateMenu_Auto(mNodes);
+
+    RActions mRActions = new RActions();
+    mRActions.institution_code = mInstitutionCode;      //机构编码
+    mRActions.institution_name = mInstitutionName;      //机构名称
+    mRActions.actionmenu = mActionClassList;        //菜单权限
+    mRActions.actionuser = mNode_Users;     //按钮功能权限
+    return AjaxResult.Success(mRActions, &quot;权限获取成功&quot;);
+&#125;
+catch (Exception ex)
+&#123;
+    LogManager.WriteLog(&quot;获取权限异常:&quot; + ex.Message);
+    return AjaxResult.Error(&quot;获取权限异常&quot;, AjaxResult.ErrCode.ServerErr);
+&#125;
+finally
+&#123;
+    context.Dispose();
+&#125;
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zichenlbl.github.io/2022/06/06/2022-06-06/" data-id="clw4yejnn0004vor91pgsan0y" class="article-share-link">Share</a>
+      <a data-url="https://zichenlbl.github.io/2022/06/06/2022-06-06/" data-id="clwyaipcc0004m4r96plbb0d0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/" rel="tag">Life</a></li></ul>
@@ -207,7 +592,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
     </div>
   </div>
 
@@ -220,23 +605,23 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
-            <a href="/2024/03/30/2024-03-30/">2024年03月30日</a>
+            <a href="/2024/04/27/2024-04-27/">2024年04月27日</a>
           </li>
         
           <li>
-            <a href="/2024/03/16/2024-03-16/">2024年03月16日</a>
+            <a href="/2024/04/20/2024-04-20/">2024年04月20日</a>
           </li>
         
           <li>
-            <a href="/2024/03/09/2024-03-09/">2024年03月09日</a>
+            <a href="/2024/04/12/2024-04-12/">2024年04月12日</a>
           </li>
         
           <li>
-            <a href="/2024/03/07/2024-03-07/">2024年03月07日</a>
+            <a href="/2024/04/10/2024-04-10/">2024年04月10日</a>
           </li>
         
           <li>
-            <a href="/2024/03/02/2024-03-02/">2024年03月02日</a>
+            <a href="/2024/04/05/2024-04-05/">2024年04月05日</a>
           </li>
         
       </ul>

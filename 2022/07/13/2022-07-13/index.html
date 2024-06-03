@@ -7,12 +7,12 @@
   
   <title>2022年07月13日 | Zichen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Typora版本 0.9.x.x 可用，0.11.18 打开提示旧版本需要更新。 swagger configureServices12345678910111213141516171819services.AddSwaggerGen(options &#x3D;&gt;    &amp;#123;        options.SwaggerDoc(&quot;v1&quot;, new Microsoft.Op">
+  <meta name="description" content="Typora版本 0.9.x.x 可用，0.11.18 打开提示旧版本需要更新。 swagger configureServicesservices.AddSwaggerGen(options &#x3D;&gt;     &amp;#123;         options.SwaggerDoc(&quot;v1&quot;, new Microsoft.OpenApi.Models.OpenApiInfo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2022年07月13日">
 <meta property="og:url" content="https://zichenlbl.github.io/2022/07/13/2022-07-13/index.html">
 <meta property="og:site_name" content="Zichen">
-<meta property="og:description" content="Typora版本 0.9.x.x 可用，0.11.18 打开提示旧版本需要更新。 swagger configureServices12345678910111213141516171819services.AddSwaggerGen(options &#x3D;&gt;    &amp;#123;        options.SwaggerDoc(&quot;v1&quot;, new Microsoft.Op">
+<meta property="og:description" content="Typora版本 0.9.x.x 可用，0.11.18 打开提示旧版本需要更新。 swagger configureServicesservices.AddSwaggerGen(options &#x3D;&gt;     &amp;#123;         options.SwaggerDoc(&quot;v1&quot;, new Microsoft.OpenApi.Models.OpenApiInfo">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-07-13T01:20:00.000Z">
 <meta property="article:modified_time" content="2023-09-30T13:34:58.351Z">
@@ -25,8 +25,6 @@
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.geekzu.org/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -105,83 +103,30 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <p>Typora版本 0.9.x.x 可用，0.11.18 打开提示旧版本需要更新。</p>
-<h2 id="swagger-configureServices"><a href="#swagger-configureServices" class="headerlink" title="swagger configureServices"></a>swagger configureServices</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">services.AddSwaggerGen(options =&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        options.SwaggerDoc(<span class="string">&quot;v1&quot;</span>, <span class="keyword">new</span> Microsoft.OpenApi.Models.OpenApiInfo</span><br><span class="line">        &#123;</span><br><span class="line">            Title = <span class="string">&quot;xxx .Net Core API 文档&quot;</span>,</span><br><span class="line">            Version = <span class="string">&quot;v1&quot;</span>,</span><br><span class="line">            Description = <span class="string">&quot;接口描述&quot;</span>,</span><br><span class="line">            Contact = <span class="keyword">new</span> Microsoft.OpenApi.Models.OpenApiContact()</span><br><span class="line">            &#123;</span><br><span class="line">                Name = <span class="string">&quot;xxx&quot;</span>,</span><br><span class="line">                Url= <span class="keyword">new</span> Uri(<span class="string">&quot;http://www.xxx.com&quot;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//swagger xml file</span></span><br><span class="line">        <span class="keyword">var</span> xmlFile = <span class="string">$&quot;<span class="subst">&#123;Assembly.GetExecutingAssembly().GetName().Name&#125;</span>.xml&quot;</span>;</span><br><span class="line">        <span class="keyword">var</span> xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);</span><br><span class="line">        options.IncludeXmlComments(xmlPath);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<h2 id="swagger-configureServices"><a href="#swagger-configureServices" class="headerlink" title="swagger configureServices"></a>swagger configureServices</h2><pre><code class="c#">services.AddSwaggerGen(options =&gt;
+    &#123;
+        options.SwaggerDoc(&quot;v1&quot;, new Microsoft.OpenApi.Models.OpenApiInfo
+        &#123;
+            Title = &quot;xxx .Net Core API 文档&quot;,
+            Version = &quot;v1&quot;,
+            Description = &quot;接口描述&quot;,
+            Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+            &#123;
+                Name = &quot;xxx&quot;,
+                Url= new Uri(&quot;http://www.xxx.com&quot;)
+            &#125;
+        &#125;);
+        //swagger xml file
+        var xmlFile = $&quot;&#123;Assembly.GetExecutingAssembly().GetName().Name&#125;.xml&quot;;
+        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        options.IncludeXmlComments(xmlPath);
+    &#125;);
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zichenlbl.github.io/2022/07/13/2022-07-13/" data-id="clw4yejnv000ovor98o0e3k1j" class="article-share-link">Share</a>
+      <a data-url="https://zichenlbl.github.io/2022/07/13/2022-07-13/" data-id="clwyaipcj000km4r9fp42e0uw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/" rel="tag">Life</a></li></ul>
@@ -260,7 +205,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
     </div>
   </div>
 
@@ -273,23 +218,23 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
-            <a href="/2024/03/30/2024-03-30/">2024年03月30日</a>
+            <a href="/2024/04/27/2024-04-27/">2024年04月27日</a>
           </li>
         
           <li>
-            <a href="/2024/03/16/2024-03-16/">2024年03月16日</a>
+            <a href="/2024/04/20/2024-04-20/">2024年04月20日</a>
           </li>
         
           <li>
-            <a href="/2024/03/09/2024-03-09/">2024年03月09日</a>
+            <a href="/2024/04/12/2024-04-12/">2024年04月12日</a>
           </li>
         
           <li>
-            <a href="/2024/03/07/2024-03-07/">2024年03月07日</a>
+            <a href="/2024/04/10/2024-04-10/">2024年04月10日</a>
           </li>
         
           <li>
-            <a href="/2024/03/02/2024-03-02/">2024年03月02日</a>
+            <a href="/2024/04/05/2024-04-05/">2024年04月05日</a>
           </li>
         
       </ul>

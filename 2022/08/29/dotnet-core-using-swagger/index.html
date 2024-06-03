@@ -7,12 +7,12 @@
   
   <title>.NET Core使用Swagger | Zichen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 安装 NuGet 包参考官网链接:  Swashbuckle 和 ASP.NET Core 入门 | Microsoft Docs NuGet包: Swashbuckle.AspNetCore 版本: 5.0.0 安装成功后项目文件的内容: 1&lt;PackageReference Include&#x3D;&quot;Swashbuckle.AspNetCore&quot; Version&#x3D;&amp;qu">
+  <meta name="description" content="1. 安装 NuGet 包参考官网链接:  Swashbuckle 和 ASP.NET Core 入门 | Microsoft Docs NuGet包: Swashbuckle.AspNetCore 版本: 5.0.0 安装成功后项目文件的内容: &lt;PackageReference Include&#x3D;&quot;Swashbuckle.AspNetCore&quot; Version&#x3D;&amp;quo">
 <meta property="og:type" content="article">
 <meta property="og:title" content=".NET Core使用Swagger">
 <meta property="og:url" content="https://zichenlbl.github.io/2022/08/29/dotnet-core-using-swagger/index.html">
 <meta property="og:site_name" content="Zichen">
-<meta property="og:description" content="1. 安装 NuGet 包参考官网链接:  Swashbuckle 和 ASP.NET Core 入门 | Microsoft Docs NuGet包: Swashbuckle.AspNetCore 版本: 5.0.0 安装成功后项目文件的内容: 1&lt;PackageReference Include&#x3D;&quot;Swashbuckle.AspNetCore&quot; Version&#x3D;&amp;qu">
+<meta property="og:description" content="1. 安装 NuGet 包参考官网链接:  Swashbuckle 和 ASP.NET Core 入门 | Microsoft Docs NuGet包: Swashbuckle.AspNetCore 版本: 5.0.0 安装成功后项目文件的内容: &lt;PackageReference Include&#x3D;&quot;Swashbuckle.AspNetCore&quot; Version&#x3D;&amp;quo">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-29T09:30:00.000Z">
 <meta property="article:modified_time" content="2023-09-30T13:34:58.485Z">
@@ -25,8 +25,6 @@
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.geekzu.org/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -108,29 +106,114 @@ var _hmt = _hmt || [];
 <p>NuGet包: Swashbuckle.AspNetCore</p>
 <p>版本: 5.0.0</p>
 <p>安装成功后项目文件的内容:</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;PackageReference Include=<span class="string">&quot;Swashbuckle.AspNetCore&quot;</span> Version=<span class="string">&quot;5.0.0&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="csharp">&lt;PackageReference Include=&quot;Swashbuckle.AspNetCore&quot; Version=&quot;5.0.0&quot; /&gt;
+</code></pre>
 <span id="more"></span>
 
 <h2 id="2-启用-XML-注释"><a href="#2-启用-XML-注释" class="headerlink" title="2. 启用 XML 注释"></a>2. 启用 XML 注释</h2><p>编辑项目文件:</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;PropertyGroup&gt;</span><br><span class="line">    &lt;GenerateDocumentationFile&gt;<span class="literal">true</span>&lt;/GenerateDocumentationFile&gt;</span><br><span class="line">    &lt;NoWarn&gt;$(NoWarn);<span class="number">1591</span>&lt;/NoWarn&gt;</span><br><span class="line">&lt;/PropertyGroup&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-添加中间件"><a href="#3-添加中间件" class="headerlink" title="3. 添加中间件"></a>3. 添加中间件</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Register the Swagger generator, defining 1 or more Swagger documents</span></span><br><span class="line">services.AddSwaggerGen();</span><br></pre></td></tr></table></figure>
-
+<pre><code class="csharp">&lt;PropertyGroup&gt;
+    &lt;GenerateDocumentationFile&gt;true&lt;/GenerateDocumentationFile&gt;
+    &lt;NoWarn&gt;$(NoWarn);1591&lt;/NoWarn&gt;
+&lt;/PropertyGroup&gt;
+</code></pre>
+<h2 id="3-添加中间件"><a href="#3-添加中间件" class="headerlink" title="3. 添加中间件"></a>3. 添加中间件</h2><pre><code class="csharp">// Register the Swagger generator, defining 1 or more Swagger documents
+services.AddSwaggerGen();
+</code></pre>
 <p>或者添加配置:</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Register the Swagger generator, defining 1 or more Swagger documents</span></span><br><span class="line">services.AddSwaggerGen(c =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    c.SwaggerDoc(<span class="string">&quot;v1&quot;</span>, <span class="keyword">new</span> OpenApiInfo</span><br><span class="line">    &#123;</span><br><span class="line">        Version = <span class="string">&quot;v1&quot;</span>,</span><br><span class="line">        Title = <span class="string">&quot;ToDo API&quot;</span>,</span><br><span class="line">        Description = <span class="string">&quot;A simple example ASP.NET Core Web API&quot;</span>,</span><br><span class="line">        TermsOfService = <span class="keyword">new</span> Uri(<span class="string">&quot;https://example.com/terms&quot;</span>),</span><br><span class="line">        Contact = <span class="keyword">new</span> OpenApiContact</span><br><span class="line">        &#123;</span><br><span class="line">            Name = <span class="string">&quot;Shayne Boyer&quot;</span>,</span><br><span class="line">            Email = <span class="built_in">string</span>.Empty,</span><br><span class="line">            Url = <span class="keyword">new</span> Uri(<span class="string">&quot;https://twitter.com/spboyer&quot;</span>),</span><br><span class="line">        &#125;,</span><br><span class="line">        License = <span class="keyword">new</span> OpenApiLicense</span><br><span class="line">        &#123;</span><br><span class="line">            Name = <span class="string">&quot;Use under LICX&quot;</span>,</span><br><span class="line">            Url = <span class="keyword">new</span> Uri(<span class="string">&quot;https://example.com/license&quot;</span>),</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Set the comments path for the Swagger JSON and UI.</span></span><br><span class="line">    <span class="keyword">var</span> xmlFile = <span class="string">$&quot;<span class="subst">&#123;Assembly.GetExecutingAssembly().GetName().Name&#125;</span>.xml&quot;</span>;</span><br><span class="line">    <span class="keyword">var</span> xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);</span><br><span class="line">    c.IncludeXmlComments(xmlPath);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<pre><code class="csharp">// Register the Swagger generator, defining 1 or more Swagger documents
+services.AddSwaggerGen(c =&gt;
+&#123;
+    c.SwaggerDoc(&quot;v1&quot;, new OpenApiInfo
+    &#123;
+        Version = &quot;v1&quot;,
+        Title = &quot;ToDo API&quot;,
+        Description = &quot;A simple example ASP.NET Core Web API&quot;,
+        TermsOfService = new Uri(&quot;https://example.com/terms&quot;),
+        Contact = new OpenApiContact
+        &#123;
+            Name = &quot;Shayne Boyer&quot;,
+            Email = string.Empty,
+            Url = new Uri(&quot;https://twitter.com/spboyer&quot;),
+        &#125;,
+        License = new OpenApiLicense
+        &#123;
+            Name = &quot;Use under LICX&quot;,
+            Url = new Uri(&quot;https://example.com/license&quot;),
+        &#125;
+    &#125;);
 
+    // Set the comments path for the Swagger JSON and UI.
+    var xmlFile = $&quot;&#123;Assembly.GetExecutingAssembly().GetName().Name&#125;.xml&quot;;
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+&#125;);
+</code></pre>
 <h2 id="4-启用生成的-JSON-文档和-Swagger-UI-提供服务"><a href="#4-启用生成的-JSON-文档和-Swagger-UI-提供服务" class="headerlink" title="4. 启用生成的 JSON 文档和 Swagger UI 提供服务"></a>4. 启用生成的 JSON 文档和 Swagger UI 提供服务</h2><p>在请求处理管道app.UseEndpoints前面添加:</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Enable middleware to serve generated Swagger as a JSON endpoint.</span></span><br><span class="line">app.UseSwagger();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.)</span></span><br><span class="line">app.UseSwaggerUI(c =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    c.SwaggerEndpoint(<span class="string">&quot;/swagger/v1/swagger.json&quot;</span>, <span class="string">&quot;My API V1.0&quot;</span>);</span><br><span class="line">    c.RoutePrefix = <span class="built_in">string</span>.Empty;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<pre><code class="csharp">// Enable middleware to serve generated Swagger as a JSON endpoint.
+app.UseSwagger();
 
+// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.)
+app.UseSwaggerUI(c =&gt;
+&#123;
+    c.SwaggerEndpoint(&quot;/swagger/v1/swagger.json&quot;, &quot;My API V1.0&quot;);
+    c.RoutePrefix = string.Empty;
+&#125;);
+</code></pre>
 <p>完成,运行项目。</p>
 <h2 id="5-Other"><a href="#5-Other" class="headerlink" title="5. Other"></a>5. Other</h2><h3 id="5-1-数据注释"><a href="#5-1-数据注释" class="headerlink" title="5.1 数据注释"></a>5.1 数据注释</h3><p>使用[Required]</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.ComponentModel;</span><br><span class="line"><span class="keyword">using</span> System.ComponentModel.DataAnnotations;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">TodoApi.Models</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TodoItem</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">long</span> Id &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">        [<span class="meta">Required</span>]</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">        [<span class="meta">DefaultValue(false)</span>]</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">bool</span> IsComplete &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="csharp">using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
-<h3 id="5-2-声明控制器的操作支持的响应内容类型"><a href="#5-2-声明控制器的操作支持的响应内容类型" class="headerlink" title="5.2 声明控制器的操作支持的响应内容类型"></a>5.2 声明控制器的操作支持的响应内容类型</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">Produces(<span class="string">&quot;application/json&quot;</span>)</span>]</span><br><span class="line">[<span class="meta">Route(<span class="string">&quot;api/[controller]&quot;</span>)</span>]</span><br><span class="line">[<span class="meta">ApiController</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TodoController</span> : <span class="title">ControllerBase</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> TodoContext _context;</span><br></pre></td></tr></table></figure>
+namespace TodoApi.Models
+&#123;
+    public class TodoItem
+    &#123;
+        public long Id &#123; get; set; &#125;
 
-<h3 id="5-3-描述响应类型"><a href="#5-3-描述响应类型" class="headerlink" title="5.3 描述响应类型"></a>5.3 描述响应类型</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> Creates a TodoItem.</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;remarks&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> Sample request:</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span>     POST /Todo</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span>     &#123;</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span>        &quot;id&quot;: 1,</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span>        &quot;name&quot;: &quot;Item1&quot;,</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span>        &quot;isComplete&quot;: true</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span>     &#125;</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/remarks&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;item&quot;&gt;</span><span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span>A newly created TodoItem<span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;response code=&quot;201&quot;&gt;</span>Returns the newly created item<span class="doctag">&lt;/response&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;response code=&quot;400&quot;&gt;</span>If the item is null<span class="doctag">&lt;/response&gt;</span>            </span></span><br><span class="line">[<span class="meta">HttpPost</span>]</span><br><span class="line">[<span class="meta">ProducesResponseType(StatusCodes.Status201Created)</span>]</span><br><span class="line">[<span class="meta">ProducesResponseType(StatusCodes.Status400BadRequest)</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> ActionResult&lt;TodoItem&gt; <span class="title">Create</span>(<span class="params">TodoItem item</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    _context.TodoItems.Add(item);</span><br><span class="line">    _context.SaveChanges();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> CreatedAtRoute(<span class="string">&quot;GetTodo&quot;</span>, <span class="keyword">new</span> &#123; id = item.Id &#125;, item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        [Required]
+        public string Name &#123; get; set; &#125;
 
+        [DefaultValue(false)]
+        public bool IsComplete &#123; get; set; &#125;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="5-2-声明控制器的操作支持的响应内容类型"><a href="#5-2-声明控制器的操作支持的响应内容类型" class="headerlink" title="5.2 声明控制器的操作支持的响应内容类型"></a>5.2 声明控制器的操作支持的响应内容类型</h3><pre><code class="csharp">[Produces(&quot;application/json&quot;)]
+[Route(&quot;api/[controller]&quot;)]
+[ApiController]
+public class TodoController : ControllerBase
+&#123;
+    private readonly TodoContext _context;
+</code></pre>
+<h3 id="5-3-描述响应类型"><a href="#5-3-描述响应类型" class="headerlink" title="5.3 描述响应类型"></a>5.3 描述响应类型</h3><pre><code class="csharp">/// &lt;summary&gt;
+/// Creates a TodoItem.
+/// &lt;/summary&gt;
+/// &lt;remarks&gt;
+/// Sample request:
+///
+///     POST /Todo
+///     &#123;
+///        &quot;id&quot;: 1,
+///        &quot;name&quot;: &quot;Item1&quot;,
+///        &quot;isComplete&quot;: true
+///     &#125;
+///
+/// &lt;/remarks&gt;
+/// &lt;param name=&quot;item&quot;&gt;&lt;/param&gt;
+/// &lt;returns&gt;A newly created TodoItem&lt;/returns&gt;
+/// &lt;response code=&quot;201&quot;&gt;Returns the newly created item&lt;/response&gt;
+/// &lt;response code=&quot;400&quot;&gt;If the item is null&lt;/response&gt;            
+[HttpPost]
+[ProducesResponseType(StatusCodes.Status201Created)]
+[ProducesResponseType(StatusCodes.Status400BadRequest)]
+public ActionResult&lt;TodoItem&gt; Create(TodoItem item)
+&#123;
+    _context.TodoItems.Add(item);
+    _context.SaveChanges();
+    
+    return CreatedAtRoute(&quot;GetTodo&quot;, new &#123; id = item.Id &#125;, item);
+&#125;
+</code></pre>
 <p>End.</p>
 <p>谢谢您的阅读！</p>
 <p>Copyright 2022 Zichen</p>
@@ -141,7 +224,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zichenlbl.github.io/2022/08/29/dotnet-core-using-swagger/" data-id="clw4yejpi0088vor92ot9fn83" class="article-share-link">Share</a>
+      <a data-url="https://zichenlbl.github.io/2022/08/29/dotnet-core-using-swagger/" data-id="clwyaipdu008cm4r93p368fjf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NET/" rel="tag">.NET</a></li></ul>
@@ -220,7 +303,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
     </div>
   </div>
 
@@ -233,23 +316,23 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
-            <a href="/2024/03/30/2024-03-30/">2024年03月30日</a>
+            <a href="/2024/04/27/2024-04-27/">2024年04月27日</a>
           </li>
         
           <li>
-            <a href="/2024/03/16/2024-03-16/">2024年03月16日</a>
+            <a href="/2024/04/20/2024-04-20/">2024年04月20日</a>
           </li>
         
           <li>
-            <a href="/2024/03/09/2024-03-09/">2024年03月09日</a>
+            <a href="/2024/04/12/2024-04-12/">2024年04月12日</a>
           </li>
         
           <li>
-            <a href="/2024/03/07/2024-03-07/">2024年03月07日</a>
+            <a href="/2024/04/10/2024-04-10/">2024年04月10日</a>
           </li>
         
           <li>
-            <a href="/2024/03/02/2024-03-02/">2024年03月02日</a>
+            <a href="/2024/04/05/2024-04-05/">2024年04月05日</a>
           </li>
         
       </ul>

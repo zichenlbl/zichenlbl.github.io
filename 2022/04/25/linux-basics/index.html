@@ -35,8 +35,6 @@
     <link rel="icon" href="/favicon.png">
   
   
-    <link href="//fonts.geekzu.org/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
   
 <link rel="stylesheet" href="/css/style.css">
 
@@ -223,8 +221,21 @@ var _hmt = _hmt || [];
 <p>修改权限：<code>chmod u=rwx,g=rwx,o=rx 文件名或目录名</code> ， 添加权限：<code>chmod o+w 文件名或目录名</code> ， 删除权限：<code>chmod a-x 文件名或目录名</code> ，第二种方式使用数字修改权限：<code>chmod 777 文件名或目录名</code> ， </p>
 <h2 id="所有者"><a href="#所有者" class="headerlink" title="所有者"></a>所有者</h2><p>修改文件的所有者：<code>chown 用户名 文件名或目录名</code> ， 修改文件的所有者和所在组：<code>chown 用户名:组名 文件名或目录名</code> ， 修改多级目录的所有者：<code>chown -R 用户名 目录名</code> ，</p>
 <h2 id="定时任务"><a href="#定时任务" class="headerlink" title="定时任务"></a>定时任务</h2><h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><h3 id="设置静态ip"><a href="#设置静态ip" class="headerlink" title="设置静态ip"></a>设置静态ip</h3><p>修改文件<code>/etc/sysconfig/network-scripts/ifcfg-ens33</code> ， 修改内容：</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">DEVICE</span>=<span class="string">eth0 # 接口名(设备、网卡)</span></span><br><span class="line"><span class="attr">HWADDR</span>=<span class="string">00:0C:2x:6x:0x:xx #MAC地址</span></span><br><span class="line"><span class="attr">TYPE</span>=<span class="string">&quot;Ethernet&quot; # 网络类型(通常是Ethernet)</span></span><br><span class="line"><span class="attr">UUID</span>=<span class="string">098908-8900-sd90-9fds09 #随机id</span></span><br><span class="line"><span class="comment">#系统启动的时候网路接口是否有效(yes/no)</span></span><br><span class="line"><span class="attr">ONBOOT</span>=<span class="string">yes</span></span><br><span class="line"><span class="comment">#IP的配置方法[none|static|abootp|dhcp](引导时不使用协议|静态分配IP|BOOTP协议|DHCP协议)</span></span><br><span class="line"><span class="attr">BOOTPROTO</span>=<span class="string">static</span></span><br><span class="line"><span class="comment">#ip地址</span></span><br><span class="line"><span class="attr">IPADDR</span>=<span class="string">192.168.200.110</span></span><br><span class="line"><span class="comment">#网关</span></span><br><span class="line"><span class="attr">GATEWAY</span>=<span class="string">192.168.200.2</span></span><br><span class="line"><span class="comment">#域名解析器</span></span><br><span class="line"><span class="attr">DNS1</span>=<span class="string">192.168.200.2</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="properties">DEVICE=eth0 # 接口名(设备、网卡)
+HWADDR=00:0C:2x:6x:0x:xx #MAC地址
+TYPE=&quot;Ethernet&quot; # 网络类型(通常是Ethernet)
+UUID=098908-8900-sd90-9fds09 #随机id
+#系统启动的时候网路接口是否有效(yes/no)
+ONBOOT=yes
+#IP的配置方法[none|static|abootp|dhcp](引导时不使用协议|静态分配IP|BOOTP协议|DHCP协议)
+BOOTPROTO=static
+#ip地址
+IPADDR=192.168.200.110
+#网关
+GATEWAY=192.168.200.2
+#域名解析器
+DNS1=192.168.200.2
+</code></pre>
 <p>生效：<code>service network restart</code>或者重启<code>reboot</code></p>
 <h3 id="设置主机名"><a href="#设置主机名" class="headerlink" title="设置主机名"></a>设置主机名</h3><p>查看主机名：<code>hostname</code> ， 修改主机名文件：<code>/etc/hostname</code> ，修改好后重启</p>
 <h3 id="主机名映射ip"><a href="#主机名映射ip" class="headerlink" title="主机名映射ip"></a>主机名映射ip</h3><p>修改windows文件<code>C:\Windows\System32\drivers\etc</code> ， 添加<code>192.168.xx.xx 主机名</code> ，访问主机名时会访问对应的IP。</p>
@@ -235,61 +246,83 @@ var _hmt = _hmt || [];
 <p>名字中属性的含义：i686或i386表示32位系统，x86_64表示64位系统，noarch表示通用。</p>
 <p>查询是否安装了某个软件包：<code>rpm -q 软件包名</code> ， </p>
 <h2 id="1-文件与文件夹操作"><a href="#1-文件与文件夹操作" class="headerlink" title="1. 文件与文件夹操作"></a>1. 文件与文件夹操作</h2><h3 id="1-1-创建文件夹"><a href="#1-1-创建文件夹" class="headerlink" title="1.1 创建文件夹"></a>1.1 创建文件夹</h3><p>mkdir 命令, 必须目标文件夹的父文件夹都存在, 否则执行不成功.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir /zichen</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@MyCentOs7 /]# mkdir /zichen2/1</span><br><span class="line">mkdir: cannot create directory ‘/zichen2/1’: No such file or directory</span><br></pre></td></tr></table></figure>
-
+<pre><code class="shell">mkdir /zichen
+</code></pre>
+<pre><code class="shell">[root@MyCentOs7 /]# mkdir /zichen2/1
+mkdir: cannot create directory ‘/zichen2/1’: No such file or directory
+</code></pre>
 <p>mkdir -p 命令, 强制创建.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /zichen2/1</span><br></pre></td></tr></table></figure>
-
+<pre><code class="shell">mkdir -p /zichen2/1
+</code></pre>
 <h3 id="1-2-创建文件"><a href="#1-2-创建文件" class="headerlink" title="1.2 创建文件"></a>1.2 创建文件</h3><p>touch、vi、echo命令用于创建文件.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch /zichen/1.txt</span><br></pre></td></tr></table></figure>
-
+<pre><code class="shell">touch /zichen/1.txt
+</code></pre>
 <p>批量创建文件: 第1个数表示起始, 第2个数表示结束, 第3个数表示步长.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@MyCentOs7 zichen]# touch /zichen/&#123;1..4..1&#125;.mp3</span><br><span class="line">[root@MyCentOs7 zichen]# ll</span><br><span class="line">total 0</span><br><span class="line">-rw-r--r-- 1 root root 0 Aug 31 16:13 1.txt</span><br><span class="line">-rw-r--r-- 1 root root 0 Aug 31 16:14 2.mp3</span><br><span class="line">-rw-r--r-- 1 root root 0 Aug 31 16:14 3.mp3</span><br><span class="line">-rw-r--r-- 1 root root 0 Aug 31 16:14 4.mp3</span><br></pre></td></tr></table></figure>
-
+<pre><code class="shell">[root@MyCentOs7 zichen]# touch /zichen/&#123;1..4..1&#125;.mp3
+[root@MyCentOs7 zichen]# ll
+total 0
+-rw-r--r-- 1 root root 0 Aug 31 16:13 1.txt
+-rw-r--r-- 1 root root 0 Aug 31 16:14 2.mp3
+-rw-r--r-- 1 root root 0 Aug 31 16:14 3.mp3
+-rw-r--r-- 1 root root 0 Aug 31 16:14 4.mp3
+</code></pre>
 <p>vi 和 vim 命令打开一个不存在的文件, 就会创建该文件. </p>
 <p>vi 命令, :wq 保存并退出.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@MyCentOs7 zichen]# vi 3.mp4</span><br></pre></td></tr></table></figure>
-
+<pre><code class="shell">[root@MyCentOs7 zichen]# vi 3.mp4
+</code></pre>
 <p>echo 命令在屏幕上打印信息, 结合 &gt; 和 &gt;&gt; 就会创建文件.</p>
 <p>echo 命令, &gt;表示覆盖, &gt;&gt; 表示追加.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@MyCentOs7 zichen]# echo Hello World!</span><br><span class="line">Hello World!</span><br><span class="line">[root@MyCentOs7 zichen]# echo Hello World! &gt; 2.txt</span><br></pre></td></tr></table></figure>
-
+<pre><code class="shell">[root@MyCentOs7 zichen]# echo Hello World!
+Hello World!
+[root@MyCentOs7 zichen]# echo Hello World! &gt; 2.txt
+</code></pre>
 <h3 id="1-3-删除文件夹"><a href="#1-3-删除文件夹" class="headerlink" title="1.3 删除文件夹"></a>1.3 删除文件夹</h3><p>rm 命令, 参数 -r 表示递归删除, 参数 -f 表示强制删除不会提示是否删除, 禁止使用: rm -rf /* 表示删除系统所有文件.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@MyCentOs7 /]# rm -r /zichen2/</span><br><span class="line">rm: descend into directory ‘/zichen2/’? y</span><br><span class="line">rm: remove directory ‘/zichen2/1’? y</span><br><span class="line">rm: remove directory ‘/zichen2/’? y</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-4-删除文件"><a href="#1-4-删除文件" class="headerlink" title="1.4 删除文件"></a>1.4 删除文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@MyCentOs7 /]# rm /zichen/1.txt </span><br><span class="line">rm: remove regular empty file ‘/zichen/1.txt’? y</span><br></pre></td></tr></table></figure>
-
+<pre><code class="shell">[root@MyCentOs7 /]# rm -r /zichen2/
+rm: descend into directory ‘/zichen2/’? y
+rm: remove directory ‘/zichen2/1’? y
+rm: remove directory ‘/zichen2/’? y
+</code></pre>
+<h3 id="1-4-删除文件"><a href="#1-4-删除文件" class="headerlink" title="1.4 删除文件"></a>1.4 删除文件</h3><pre><code class="shell">[root@MyCentOs7 /]# rm /zichen/1.txt 
+rm: remove regular empty file ‘/zichen/1.txt’? y
+</code></pre>
 <h3 id="1-5-切换目录"><a href="#1-5-切换目录" class="headerlink" title="1.5 切换目录"></a>1.5 切换目录</h3><p>cd 命令, </p>
 <p>进入当前目录下的 zichen 目录; </p>
 <p>返回上一级目录; </p>
 <p>进入根目录下的 zichen 目录, zichen 目录下的 1 目录;</p>
 <p>返回上一级目录, 再返回上一级目录.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@MyCentOs7 /]# cd zichen</span><br><span class="line">[root@MyCentOs7 zichen]# cd ..</span><br><span class="line">[root@MyCentOs7 /]# cd /zichen/1</span><br><span class="line">[root@MyCentOs7 1]# cd ../../</span><br><span class="line">[root@MyCentOs7 /]# </span><br></pre></td></tr></table></figure>
-
+<pre><code class="shell">[root@MyCentOs7 /]# cd zichen
+[root@MyCentOs7 zichen]# cd ..
+[root@MyCentOs7 /]# cd /zichen/1
+[root@MyCentOs7 1]# cd ../../
+[root@MyCentOs7 /]# 
+</code></pre>
 <h3 id="1-6-复制粘贴文件夹"><a href="#1-6-复制粘贴文件夹" class="headerlink" title="1.6 复制粘贴文件夹"></a>1.6 复制粘贴文件夹</h3><p> cp 命令.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@MyCentOs7 b]# cp -a /zichen/b /zichen2/</span><br></pre></td></tr></table></figure>
-
-
-
+<pre><code class="shell">[root@MyCentOs7 b]# cp -a /zichen/b /zichen2/
+</code></pre>
 <h3 id="1-7-复制粘贴文件"><a href="#1-7-复制粘贴文件" class="headerlink" title="1.7 复制粘贴文件"></a>1.7 复制粘贴文件</h3><p>cp 命令, 复制根目录下的 zichen 文件夹中的文件 1.txt , 粘贴到根目录下的 zichen2 文件夹中.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@MyCentOs7 zichen]# cp /zichen/1.txt /zichen2/</span><br><span class="line">[root@MyCentOs7 zichen]# ll /zichen2</span><br><span class="line">total 0</span><br><span class="line">-rw-r--r-- 1 root root 0 Aug 31 16:45 1.txt</span><br><span class="line">[root@MyCentOs7 zichen]# </span><br></pre></td></tr></table></figure>
-
+<pre><code class="shell">[root@MyCentOs7 zichen]# cp /zichen/1.txt /zichen2/
+[root@MyCentOs7 zichen]# ll /zichen2
+total 0
+-rw-r--r-- 1 root root 0 Aug 31 16:45 1.txt
+[root@MyCentOs7 zichen]# 
+</code></pre>
 <p>复制文件并重命名文件名, 复制根目录下的 zichen 文件夹中的文件 2.txt , 粘贴到根目录下的 zichen2 文件夹中, 并重命名为 new.txt 文件.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@MyCentOs7 zichen]# cp /zichen/2.txt /zichen2/new.txt</span><br><span class="line">[root@MyCentOs7 zichen]# ll /zichen2/</span><br><span class="line">total 4</span><br><span class="line">-rw-r--r-- 1 root root  0 Aug 31 16:45 1.txt</span><br><span class="line">-rw-r--r-- 1 root root 46 Aug 31 17:17 new.txt</span><br><span class="line">[root@MyCentOs7 zichen]# </span><br></pre></td></tr></table></figure>
-
+<pre><code class="shell">[root@MyCentOs7 zichen]# cp /zichen/2.txt /zichen2/new.txt
+[root@MyCentOs7 zichen]# ll /zichen2/
+total 4
+-rw-r--r-- 1 root root  0 Aug 31 16:45 1.txt
+-rw-r--r-- 1 root root 46 Aug 31 17:17 new.txt
+[root@MyCentOs7 zichen]# 
+</code></pre>
 <p>将目录下所有文件复制到其他目录下, 若给出的源文件是一个目录文件，此时将复制该目录下所有的子目录和文件。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@MyCentOs7 3]# cp -r /zichen/* /zichen2/3/</span><br></pre></td></tr></table></figure>
-
-
-
+<pre><code class="shell">[root@MyCentOs7 3]# cp -r /zichen/* /zichen2/3/
+</code></pre>
 <h3 id="1-8-查看当前工作目录"><a href="#1-8-查看当前工作目录" class="headerlink" title="1.8 查看当前工作目录"></a>1.8 查看当前工作目录</h3><p>pwd 命令.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zichenlbl.github.io/2022/04/25/linux-basics/" data-id="clw4yejpi0089vor94gyycgx3" class="article-share-link">Share</a>
+      <a data-url="https://zichenlbl.github.io/2022/04/25/linux-basics/" data-id="clwyaipdv008jm4r9087h9qgf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
@@ -368,7 +401,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
     </div>
   </div>
 
@@ -381,23 +414,23 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
-            <a href="/2024/03/30/2024-03-30/">2024年03月30日</a>
+            <a href="/2024/04/27/2024-04-27/">2024年04月27日</a>
           </li>
         
           <li>
-            <a href="/2024/03/16/2024-03-16/">2024年03月16日</a>
+            <a href="/2024/04/20/2024-04-20/">2024年04月20日</a>
           </li>
         
           <li>
-            <a href="/2024/03/09/2024-03-09/">2024年03月09日</a>
+            <a href="/2024/04/12/2024-04-12/">2024年04月12日</a>
           </li>
         
           <li>
-            <a href="/2024/03/07/2024-03-07/">2024年03月07日</a>
+            <a href="/2024/04/10/2024-04-10/">2024年04月10日</a>
           </li>
         
           <li>
-            <a href="/2024/03/02/2024-03-02/">2024年03月02日</a>
+            <a href="/2024/04/05/2024-04-05/">2024年04月05日</a>
           </li>
         
       </ul>

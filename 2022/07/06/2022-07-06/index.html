@@ -7,12 +7,12 @@
   
   <title>2022年07月06日 | Zichen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ASP .Net Core.NET CLI.NET 命令行接口 (CLI) 工具是用于开发、生成、运行和发布 .NET 应用程序的跨平台工具链。 官网：https:&#x2F;&#x2F;docs.microsoft.com&#x2F;zh-cn&#x2F;dotnet&#x2F;core&#x2F;tools&#x2F; 命令行创建项目查看dotnet命令帮助 1&gt; dotnet --help">
+  <meta name="description" content="ASP .Net Core.NET CLI.NET 命令行接口 (CLI) 工具是用于开发、生成、运行和发布 .NET 应用程序的跨平台工具链。 官网：https:&#x2F;&#x2F;docs.microsoft.com&#x2F;zh-cn&#x2F;dotnet&#x2F;core&#x2F;tools&#x2F; 命令行创建项目查看dotnet命令帮助 &gt; dotnet --help">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2022年07月06日">
 <meta property="og:url" content="https://zichenlbl.github.io/2022/07/06/2022-07-06/index.html">
 <meta property="og:site_name" content="Zichen">
-<meta property="og:description" content="ASP .Net Core.NET CLI.NET 命令行接口 (CLI) 工具是用于开发、生成、运行和发布 .NET 应用程序的跨平台工具链。 官网：https:&#x2F;&#x2F;docs.microsoft.com&#x2F;zh-cn&#x2F;dotnet&#x2F;core&#x2F;tools&#x2F; 命令行创建项目查看dotnet命令帮助 1&gt; dotnet --help">
+<meta property="og:description" content="ASP .Net Core.NET CLI.NET 命令行接口 (CLI) 工具是用于开发、生成、运行和发布 .NET 应用程序的跨平台工具链。 官网：https:&#x2F;&#x2F;docs.microsoft.com&#x2F;zh-cn&#x2F;dotnet&#x2F;core&#x2F;tools&#x2F; 命令行创建项目查看dotnet命令帮助 &gt; dotnet --help">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://zichenlbl.github.io/2022/07/06/2022-07-06/image-20220706141233078.png">
 <meta property="og:image" content="https://zichenlbl.github.io/2022/07/06/2022-07-06/image-20220706175629098.png">
@@ -29,8 +29,6 @@
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.geekzu.org/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -111,19 +109,19 @@ var _hmt = _hmt || [];
         <h2 id="ASP-Net-Core"><a href="#ASP-Net-Core" class="headerlink" title="ASP .Net Core"></a>ASP .Net Core</h2><h3 id="NET-CLI"><a href="#NET-CLI" class="headerlink" title=".NET CLI"></a>.NET CLI</h3><p>.NET 命令行接口 (CLI) 工具是用于开发、生成、运行和发布 .NET 应用程序的跨平台工具链。</p>
 <p>官网：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/dotnet/core/tools/">https://docs.microsoft.com/zh-cn/dotnet/core/tools/</a></p>
 <h4 id="命令行创建项目"><a href="#命令行创建项目" class="headerlink" title="命令行创建项目"></a>命令行创建项目</h4><p>查看dotnet命令帮助</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; dotnet <span class="literal">--help</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="powershell">&gt; dotnet --help
+</code></pre>
 <span id="more"></span>
 
 <p>查看项目模板列表</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; dotnet new <span class="literal">-l</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="powershell">&gt; dotnet new -l
+</code></pre>
 <p>创建控制台模板项目</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; dotnet new console</span><br></pre></td></tr></table></figure>
-
+<pre><code class="powershell">&gt; dotnet new console
+</code></pre>
 <p>运行</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; dotnet run</span><br></pre></td></tr></table></figure>
-
+<pre><code class="powershell">&gt; dotnet run
+</code></pre>
 <h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3><p>创建Nunit测试项目</p>
 <p><img src="/2022/07/06/2022-07-06/image-20220706141233078.png" alt="image-20220706141233078"></p>
 <hr>
@@ -132,55 +130,246 @@ var _hmt = _hmt || [];
 <p>p41 鉴权实现  授权未实现</p>
 <h3 id="异步编程"><a href="#异步编程" class="headerlink" title="异步编程"></a>异步编程</h3><p>异步方法用<code>async</code>关键字修饰，返回值一般是<code>Task&lt;T&gt;</code>,T是返回类型。</p>
 <p>使用方法在方法前加上<code>await</code>关键字。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Test01</span>()</span></span><br><span class="line">&#123;<span class="comment">//往记事本中写入Hello</span></span><br><span class="line">    <span class="comment">//D:\test</span></span><br><span class="line">    <span class="built_in">string</span> fileName = <span class="string">@&quot;D:\test\test.txt&quot;</span>;</span><br><span class="line">    <span class="keyword">await</span> File.WriteAllTextAsync(fileName, <span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c#">public async Task Test01()
+&#123;//往记事本中写入Hello
+    //D:\test
+    string fileName = @&quot;D:\test\test.txt&quot;;
+    await File.WriteAllTextAsync(fileName, &quot;Hello&quot;);
+&#125;
+</code></pre>
 <h3 id="LINQ"><a href="#LINQ" class="headerlink" title="LINQ"></a>LINQ</h3><h4 id="Func"><a href="#Func" class="headerlink" title="Func"></a>Func</h4><p>封装一个具有参数并有返回类型值的方法。</p>
 <h4 id="Action"><a href="#Action" class="headerlink" title="Action"></a>Action</h4><p>封装具有单参数且不返回值的方法。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Func&lt;<span class="built_in">int</span>, <span class="built_in">int</span>, <span class="built_in">int</span>&gt; sum = (x, y) =&gt; x + y;</span><br><span class="line">Console.WriteLine(sum(<span class="number">2</span>, <span class="number">3</span>)); <span class="comment">//5</span></span><br><span class="line"></span><br><span class="line">Func&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt; sum1 = x =&gt; x + <span class="number">1</span> ;</span><br><span class="line">Console.WriteLine(sum1(<span class="number">2</span>)); <span class="comment">//3</span></span><br><span class="line"></span><br><span class="line">Action&lt;<span class="built_in">int</span>&gt; sum2 = i =&gt; Console.WriteLine(i + <span class="string">&quot;ok&quot;</span>);</span><br><span class="line">sum2(<span class="number">99</span>); <span class="comment">//99ok</span></span><br></pre></td></tr></table></figure>
+<pre><code class="c#">Func&lt;int, int, int&gt; sum = (x, y) =&gt; x + y;
+Console.WriteLine(sum(2, 3)); //5
 
-<h4 id="Linq"><a href="#Linq" class="headerlink" title="Linq"></a>Linq</h4><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="comment">//Where</span></span><br><span class="line"><span class="built_in">int</span>[] nums = <span class="keyword">new</span> <span class="built_in">int</span>[] &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line">IEnumerable&lt;<span class="built_in">int</span>&gt; result = nums.Where(a =&gt; a &gt; <span class="number">2</span>);</span><br><span class="line"><span class="keyword">foreach</span> (<span class="keyword">var</span> item <span class="keyword">in</span> result)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(item); <span class="comment">//3 4 5</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//Count</span></span><br><span class="line">Console.WriteLine(nums.Count(a =&gt; a &lt; <span class="number">3</span>)); <span class="comment">//2</span></span><br><span class="line"><span class="comment">//Any：是否至少有一条数据</span></span><br><span class="line">Console.WriteLine(nums.Any(a =&gt; a &gt; <span class="number">100</span>)); <span class="comment">//False</span></span><br><span class="line"><span class="comment">//Single：有且只有一条满足要求的数据</span></span><br><span class="line">Console.WriteLine(nums.Single(a =&gt; a == <span class="number">2</span>)); <span class="comment">//2</span></span><br><span class="line"><span class="comment">//SingleOrDefault：最多只有一条满足要求的数据</span></span><br><span class="line">Console.WriteLine(nums.SingleOrDefault(a =&gt; a == <span class="number">11</span>)); <span class="comment">//0</span></span><br><span class="line">https:<span class="comment">//www.bilibili.com/video/BV1pK41137He?p=25 时间=&gt;11:54</span></span><br><span class="line"><span class="comment">//First：至少有一条，返回第一条</span></span><br><span class="line"><span class="comment">//FirstOrDefault：返回第一条或默认值</span></span><br></pre></td></tr></table></figure>
+Func&lt;int, int&gt; sum1 = x =&gt; x + 1 ;
+Console.WriteLine(sum1(2)); //3
 
+Action&lt;int&gt; sum2 = i =&gt; Console.WriteLine(i + &quot;ok&quot;);
+sum2(99); //99ok
+</code></pre>
+<h4 id="Linq"><a href="#Linq" class="headerlink" title="Linq"></a>Linq</h4><pre><code class="c#">using System.Collections.Generic;
+using System.Linq;
+//Where
+int[] nums = new int[] &#123; 1, 2, 3, 4, 5&#125;;
+IEnumerable&lt;int&gt; result = nums.Where(a =&gt; a &gt; 2);
+foreach (var item in result)
+&#123;
+    Console.WriteLine(item); //3 4 5
+&#125;
+//Count
+Console.WriteLine(nums.Count(a =&gt; a &lt; 3)); //2
+//Any：是否至少有一条数据
+Console.WriteLine(nums.Any(a =&gt; a &gt; 100)); //False
+//Single：有且只有一条满足要求的数据
+Console.WriteLine(nums.Single(a =&gt; a == 2)); //2
+//SingleOrDefault：最多只有一条满足要求的数据
+Console.WriteLine(nums.SingleOrDefault(a =&gt; a == 11)); //0
+https://www.bilibili.com/video/BV1pK41137He?p=25 时间=&gt;11:54
+//First：至少有一条，返回第一条
+//FirstOrDefault：返回第一条或默认值
+</code></pre>
 <h3 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h3><p>不使用依赖注入</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    ICar car = <span class="keyword">new</span> MyCar();</span><br><span class="line">    car.Name = <span class="string">&quot;布加迪威龙&quot;</span>;</span><br><span class="line">    car.PrintName();          <span class="comment">//车的名字是:布加迪威龙</span></span><br><span class="line"></span><br><span class="line">    Console.WriteLine(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">    Console.ReadKey();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ICar</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125; <span class="comment">//车的名字</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">PrintName</span>()</span>;         <span class="comment">//打印车的名字</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MyCar</span> : <span class="title">ICar</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">PrintName</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(<span class="string">$&quot;车的名字是:<span class="subst">&#123;Name&#125;</span>&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="c#">static void Main(string[] args)
+&#123;
+    ICar car = new MyCar();
+    car.Name = &quot;布加迪威龙&quot;;
+    car.PrintName();          //车的名字是:布加迪威龙
 
+    Console.WriteLine(&quot;Hello World!&quot;);
+    Console.ReadKey();
+&#125;
+
+public interface ICar
+&#123;
+    string Name &#123; get; set; &#125; //车的名字
+    void PrintName();         //打印车的名字
+&#125;
+
+public class MyCar : ICar
+&#123;
+    public string Name &#123; get; set; &#125;
+
+    public void PrintName()
+    &#123;
+        Console.WriteLine($&quot;车的名字是:&#123;Name&#125;&quot;);
+    &#125;
+&#125;
+</code></pre>
 <p>使用依赖注入</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Microsoft.Extensions.DependencyInjection; <span class="comment">//NuGet安装</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    ServiceCollection service = <span class="keyword">new</span> ServiceCollection();</span><br><span class="line">    service.AddTransient&lt;MyCar&gt;(); <span class="comment">//AddTransient瞬态，AddScoped范围，AddSingleton单例</span></span><br><span class="line">    <span class="keyword">using</span> (ServiceProvider sp = service.BuildServiceProvider()) <span class="comment">//ServiceProvider服务定位器</span></span><br><span class="line">    &#123;</span><br><span class="line">        MyCar myCar = sp.GetService&lt;MyCar&gt;();</span><br><span class="line">        myCar.Name = <span class="string">&quot;玛莎拉蒂&quot;</span>;</span><br><span class="line">        myCar.PrintName(); <span class="comment">//车的名字是:玛莎拉蒂</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Console.WriteLine(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">    Console.ReadKey();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">ICar</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125; <span class="comment">//车的名字</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">PrintName</span>()</span>;         <span class="comment">//打印车的名字</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MyCar</span> : <span class="title">ICar</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">PrintName</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(<span class="string">$&quot;车的名字是:<span class="subst">&#123;Name&#125;</span>&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="c#">using Microsoft.Extensions.DependencyInjection; //NuGet安装
 
+static void Main(string[] args)
+&#123;
+    ServiceCollection service = new ServiceCollection();
+    service.AddTransient&lt;MyCar&gt;(); //AddTransient瞬态，AddScoped范围，AddSingleton单例
+    using (ServiceProvider sp = service.BuildServiceProvider()) //ServiceProvider服务定位器
+    &#123;
+        MyCar myCar = sp.GetService&lt;MyCar&gt;();
+        myCar.Name = &quot;玛莎拉蒂&quot;;
+        myCar.PrintName(); //车的名字是:玛莎拉蒂
+    &#125;
+
+    Console.WriteLine(&quot;Hello World!&quot;);
+    Console.ReadKey();
+&#125;
+
+public interface ICar
+&#123;
+    string Name &#123; get; set; &#125; //车的名字
+    void PrintName();         //打印车的名字
+&#125;
+
+public class MyCar : ICar
+&#123;
+    public string Name &#123; get; set; &#125;
+
+    public void PrintName()
+    &#123;
+        Console.WriteLine($&quot;车的名字是:&#123;Name&#125;&quot;);
+    &#125;
+&#125;
+</code></pre>
 <h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><h4 id="根据key获取"><a href="#根据key获取" class="headerlink" title="根据key获取"></a>根据key获取</h4><p>配置文件myconfig.json</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;zs&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span> <span class="string">&quot;24&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;score&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;math&quot;</span><span class="punctuation">:</span> <span class="number">90.5</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="json">&#123;
+  &quot;name&quot;: &quot;zs&quot;,
+  &quot;age&quot;: &quot;24&quot;,
+  &quot;score&quot;: &#123;
+    &quot;math&quot;: 90.5
+  &#125;
+&#125;
+</code></pre>
 <p>​    <img src="/2022/07/06/2022-07-06/image-20220706175629098.png" alt="image-20220706175629098"></p>
 <p><img src="/2022/07/06/2022-07-06/image-20220706175730555.png" alt="image-20220706175730555"></p>
 <p>重新生成项目，运行</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Microsoft.Extensions.Configuration; <span class="comment">//NeGet安装</span></span><br><span class="line"><span class="keyword">using</span> Microsoft.Extensions.Configuration.Json;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    ConfigurationBuilder configurationBuilder = <span class="keyword">new</span> ConfigurationBuilder();</span><br><span class="line">    configurationBuilder.AddJsonFile(<span class="string">&quot;config.json&quot;</span>, optional: <span class="literal">true</span>, reloadOnChange: <span class="literal">true</span>);</span><br><span class="line">    IConfigurationRoot configurationRoot = configurationBuilder.Build();</span><br><span class="line">    <span class="built_in">string</span> name = configurationRoot[<span class="string">&quot;name&quot;</span>];</span><br><span class="line">    <span class="built_in">string</span> age = configurationRoot[<span class="string">&quot;age&quot;</span>];</span><br><span class="line">    <span class="built_in">string</span> math = configurationRoot.GetSection(<span class="string">&quot;score:math&quot;</span>).Value;</span><br><span class="line">    Console.WriteLine(name); <span class="comment">//zs</span></span><br><span class="line">    Console.WriteLine(age); <span class="comment">//24</span></span><br><span class="line">    Console.WriteLine(math); <span class="comment">//90.5</span></span><br><span class="line"></span><br><span class="line">    Console.WriteLine(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">    Console.ReadKey();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="c#">using Microsoft.Extensions.Configuration; //NeGet安装
+using Microsoft.Extensions.Configuration.Json;
 
-<h4 id="映射为类获取"><a href="#映射为类获取" class="headerlink" title="映射为类获取"></a>映射为类获取</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;zs&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span> <span class="string">&quot;24&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;score&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;math&quot;</span><span class="punctuation">:</span> <span class="number">90.5</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;english&quot;</span><span class="punctuation">:</span>  <span class="number">99</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+static void Main(string[] args)
+&#123;
+    ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+    configurationBuilder.AddJsonFile(&quot;config.json&quot;, optional: true, reloadOnChange: true);
+    IConfigurationRoot configurationRoot = configurationBuilder.Build();
+    string name = configurationRoot[&quot;name&quot;];
+    string age = configurationRoot[&quot;age&quot;];
+    string math = configurationRoot.GetSection(&quot;score:math&quot;).Value;
+    Console.WriteLine(name); //zs
+    Console.WriteLine(age); //24
+    Console.WriteLine(math); //90.5
 
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Microsoft.Extensions.Configuration;</span><br><span class="line"><span class="keyword">using</span> Microsoft.Extensions.Configuration.Binder; <span class="comment">//NeGet安装</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    ConfigurationBuilder configurationBuilder = <span class="keyword">new</span> ConfigurationBuilder();</span><br><span class="line">    configurationBuilder.AddJsonFile(<span class="string">&quot;config.json&quot;</span>, optional: <span class="literal">true</span>, reloadOnChange: <span class="literal">true</span>);</span><br><span class="line">    IConfigurationRoot configurationRoot = configurationBuilder.Build();</span><br><span class="line">    Score score = configurationRoot.GetSection(<span class="string">&quot;score&quot;</span>).Get&lt;Score&gt;();</span><br><span class="line">    <span class="comment">//英语成绩：99，数学成绩：90.5.</span></span><br><span class="line">    Console.WriteLine(<span class="string">$&quot;英语成绩：<span class="subst">&#123;score.English&#125;</span>，数学成绩：<span class="subst">&#123;score.Math&#125;</span>.&quot;</span>); </span><br><span class="line"></span><br><span class="line">    Console.WriteLine(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">    Console.ReadKey();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Score</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">double</span> Math &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">double</span> English &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    Console.WriteLine(&quot;Hello World!&quot;);
+    Console.ReadKey();
+&#125;
+</code></pre>
+<h4 id="映射为类获取"><a href="#映射为类获取" class="headerlink" title="映射为类获取"></a>映射为类获取</h4><pre><code class="json">&#123;
+  &quot;name&quot;: &quot;zs&quot;,
+  &quot;age&quot;: &quot;24&quot;,
+  &quot;score&quot;: &#123;
+    &quot;math&quot;: 90.5,
+    &quot;english&quot;:  99
+  &#125;
+&#125;
+</code></pre>
+<pre><code class="c#">using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Binder; //NeGet安装
 
+static void Main(string[] args)
+&#123;
+    ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+    configurationBuilder.AddJsonFile(&quot;config.json&quot;, optional: true, reloadOnChange: true);
+    IConfigurationRoot configurationRoot = configurationBuilder.Build();
+    Score score = configurationRoot.GetSection(&quot;score&quot;).Get&lt;Score&gt;();
+    //英语成绩：99，数学成绩：90.5.
+    Console.WriteLine($&quot;英语成绩：&#123;score.English&#125;，数学成绩：&#123;score.Math&#125;.&quot;); 
+
+    Console.WriteLine(&quot;Hello World!&quot;);
+    Console.ReadKey();
+&#125;
+
+public class Score
+&#123;
+    public double Math &#123; get; set; &#125;
+    public double English &#123; get; set; &#125;
+&#125;
+</code></pre>
 <h4 id="依赖注入获取"><a href="#依赖注入获取" class="headerlink" title="依赖注入获取"></a>依赖注入获取</h4><p>IOptionsMonitor：配置文件一改变就读取新的值</p>
 <p>IOptionsSnapshot：在一个范围(一次http请求)内读取一次配置文件</p>
 <p>NeGet安装：</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Microsoft.Extensions.Options;</span><br><span class="line"><span class="keyword">using</span> Microsoft.Extensions.Configuration.Binder;</span><br><span class="line"><span class="keyword">using</span> Microsoft.Extensions.Configuration;</span><br><span class="line"><span class="keyword">using</span> Microsoft.Extensions.Configuration.Json;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c#">using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration.Binder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
+</code></pre>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1pK41137He?p=40">https://www.bilibili.com/video/BV1pK41137He?p=40</a> 时间：20</p>
 <p>config.json</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;zs&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span> <span class="string">&quot;24&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;score&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;math&quot;</span><span class="punctuation">:</span> <span class="number">90.5</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;english&quot;</span><span class="punctuation">:</span>  <span class="number">99</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="json">&#123;
+  &quot;name&quot;: &quot;zs&quot;,
+  &quot;age&quot;: &quot;24&quot;,
+  &quot;score&quot;: &#123;
+    &quot;math&quot;: 90.5,
+    &quot;english&quot;:  99
+  &#125;
+&#125;
+</code></pre>
 <p>Score.cs</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Score</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">double</span> Math &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">double</span> English &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c#">public class Score
+&#123;
+    public double Math &#123; get; set; &#125;
+    public double English &#123; get; set; &#125;
+&#125;
+</code></pre>
 <p>Test01.cs</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Microsoft.Extensions.Options; <span class="comment">//NetGet安装</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">Test01</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> IOptionsSnapshot&lt;Score&gt; options;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Test01</span>(<span class="params">IOptionsSnapshot&lt;Score&gt; options</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.options = options;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Print</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Score options = <span class="keyword">this</span>.options.Value;</span><br><span class="line">        Console.WriteLine(<span class="string">$&quot;数学成绩：<span class="subst">&#123;options.Math&#125;</span>，英语成绩：<span class="subst">&#123;options.English&#125;</span>&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="c#">using Microsoft.Extensions.Options; //NetGet安装
 
+class Test01
+&#123;
+    private readonly IOptionsSnapshot&lt;Score&gt; options;
+
+    public Test01(IOptionsSnapshot&lt;Score&gt; options)
+    &#123;
+        this.options = options;
+    &#125;
+
+    public void Print()
+    &#123;
+        Score options = this.options.Value;
+        Console.WriteLine($&quot;数学成绩：&#123;options.Math&#125;，英语成绩：&#123;options.English&#125;&quot;);
+    &#125;
+&#125;
+</code></pre>
 <p>Main</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Microsoft.Extensions.Configuration;</span><br><span class="line"><span class="keyword">using</span> Microsoft.Extensions.Configuration.Json;</span><br><span class="line"><span class="keyword">using</span> Microsoft.Extensions.DependencyInjection; <span class="comment">//NeGet安装</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    ServiceCollection services = <span class="keyword">new</span> ServiceCollection();</span><br><span class="line">    services.AddScoped&lt;Test01&gt;();</span><br><span class="line"></span><br><span class="line">    ConfigurationBuilder configurationBuilder = <span class="keyword">new</span> ConfigurationBuilder();</span><br><span class="line">    configurationBuilder.AddJsonFile(<span class="string">&quot;config.json&quot;</span>, optional: <span class="literal">true</span>, reloadOnChange: <span class="literal">true</span>);</span><br><span class="line">    IConfigurationRoot configurationRoot = configurationBuilder.Build();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//configurationRoot.Bind(e)把Score绑定到根节点上； json：&#123;&quot;math&quot;:90.5,&quot;english&quot;:99&#125;</span></span><br><span class="line">    services.AddOptions()</span><br><span class="line">        .Configure&lt;Score&gt;(e =&gt; configurationRoot.GetSection(<span class="string">&quot;score&quot;</span>).Bind(e)); </span><br><span class="line"></span><br><span class="line">    <span class="keyword">using</span> (<span class="keyword">var</span> serviceProvider = services.BuildServiceProvider())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> test01 = serviceProvider.GetRequiredService&lt;Test01&gt;();</span><br><span class="line">        test01.Print(); <span class="comment">//数学成绩：90.5，英语成绩：99</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Console.WriteLine(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">    Console.ReadKey();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="c#">using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
+using Microsoft.Extensions.DependencyInjection; //NeGet安装
 
+static void Main(string[] args)
+&#123;
+    ServiceCollection services = new ServiceCollection();
+    services.AddScoped&lt;Test01&gt;();
+
+    ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+    configurationBuilder.AddJsonFile(&quot;config.json&quot;, optional: true, reloadOnChange: true);
+    IConfigurationRoot configurationRoot = configurationBuilder.Build();
+
+    //configurationRoot.Bind(e)把Score绑定到根节点上； json：&#123;&quot;math&quot;:90.5,&quot;english&quot;:99&#125;
+    services.AddOptions()
+        .Configure&lt;Score&gt;(e =&gt; configurationRoot.GetSection(&quot;score&quot;).Bind(e)); 
+
+    using (var serviceProvider = services.BuildServiceProvider())
+    &#123;
+        var test01 = serviceProvider.GetRequiredService&lt;Test01&gt;();
+        test01.Print(); //数学成绩：90.5，英语成绩：99
+    &#125;
+
+    Console.WriteLine(&quot;Hello World!&quot;);
+    Console.ReadKey();
+&#125;
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zichenlbl.github.io/2022/07/06/2022-07-06/" data-id="clw4yejno0006vor9dir92pr9" class="article-share-link">Share</a>
+      <a data-url="https://zichenlbl.github.io/2022/07/06/2022-07-06/" data-id="clwyaipcd0005m4r9cjy1hzrn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/" rel="tag">Life</a></li></ul>
@@ -259,7 +448,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
     </div>
   </div>
 
@@ -272,23 +461,23 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
-            <a href="/2024/03/30/2024-03-30/">2024年03月30日</a>
+            <a href="/2024/04/27/2024-04-27/">2024年04月27日</a>
           </li>
         
           <li>
-            <a href="/2024/03/16/2024-03-16/">2024年03月16日</a>
+            <a href="/2024/04/20/2024-04-20/">2024年04月20日</a>
           </li>
         
           <li>
-            <a href="/2024/03/09/2024-03-09/">2024年03月09日</a>
+            <a href="/2024/04/12/2024-04-12/">2024年04月12日</a>
           </li>
         
           <li>
-            <a href="/2024/03/07/2024-03-07/">2024年03月07日</a>
+            <a href="/2024/04/10/2024-04-10/">2024年04月10日</a>
           </li>
         
           <li>
-            <a href="/2024/03/02/2024-03-02/">2024年03月02日</a>
+            <a href="/2024/04/05/2024-04-05/">2024年04月05日</a>
           </li>
         
       </ul>

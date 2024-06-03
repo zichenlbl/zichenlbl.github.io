@@ -31,8 +31,6 @@
     <link rel="icon" href="/favicon.png">
   
   
-    <link href="//fonts.geekzu.org/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
   
 <link rel="stylesheet" href="/css/style.css">
 
@@ -113,8 +111,42 @@ var _hmt = _hmt || [];
 <p><img src="/2022/05/28/view-computer-temperature/image-20220529150913554.png" alt="image-20220529150913554"></p>
 <span id="more"></span>
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"> PS C:\Windows\system32&gt; gwmi msacpi_thermalzonetemperature -namespace &quot;root/wmi&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">__GENUS              : ……</span><br><span class="line">__CLASS              : ……</span><br><span class="line">__SUPERCLASS         : ……</span><br><span class="line">__DYNASTY            : ……</span><br><span class="line">__RELPATH            : ……</span><br><span class="line">__PROPERTY_COUNT     : ……</span><br><span class="line">__DERIVATION         : ……</span><br><span class="line">__SERVER             : ……</span><br><span class="line">__NAMESPACE          : ……</span><br><span class="line">__PATH               : ……</span><br><span class="line">Active               : ……</span><br><span class="line">ActiveTripPoint      : ……</span><br><span class="line">ActiveTripPointCount : ……</span><br><span class="line">CriticalTripPoint    : 3922</span><br><span class="line">CurrentTemperature   : 3272</span><br><span class="line">InstanceName         : ……</span><br><span class="line">PassiveTripPoint     : 0</span><br><span class="line">Reserved             : 0</span><br><span class="line">SamplingPeriod       : 0</span><br><span class="line">ThermalConstant1     : 0</span><br><span class="line">ThermalConstant2     : 0</span><br><span class="line">ThermalStamp         : ……</span><br><span class="line">PSComputerName       : ……</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PS C:\Windows\system32&gt; $temp = gwmi msacpi_thermalzonetemperature -namespace &quot;root/wmi&quot;</span><br><span class="line">PS C:\Windows\system32&gt; $temp.CriticalTripPoint / 10 - 273.15</span><br><span class="line">119.05</span><br><span class="line">PS C:\Windows\system32&gt; $temp.CurrentTemperature / 10 - 273.15</span><br><span class="line">54.05</span><br><span class="line">PS C:\Windows\system32&gt;</span><br></pre></td></tr></table></figure>
+<pre><code class="shell"> PS C:\Windows\system32&gt; gwmi msacpi_thermalzonetemperature -namespace &quot;root/wmi&quot;
 
+
+__GENUS              : ……
+__CLASS              : ……
+__SUPERCLASS         : ……
+__DYNASTY            : ……
+__RELPATH            : ……
+__PROPERTY_COUNT     : ……
+__DERIVATION         : ……
+__SERVER             : ……
+__NAMESPACE          : ……
+__PATH               : ……
+Active               : ……
+ActiveTripPoint      : ……
+ActiveTripPointCount : ……
+CriticalTripPoint    : 3922
+CurrentTemperature   : 3272
+InstanceName         : ……
+PassiveTripPoint     : 0
+Reserved             : 0
+SamplingPeriod       : 0
+ThermalConstant1     : 0
+ThermalConstant2     : 0
+ThermalStamp         : ……
+PSComputerName       : ……
+
+
+
+PS C:\Windows\system32&gt; $temp = gwmi msacpi_thermalzonetemperature -namespace &quot;root/wmi&quot;
+PS C:\Windows\system32&gt; $temp.CriticalTripPoint / 10 - 273.15
+119.05
+PS C:\Windows\system32&gt; $temp.CurrentTemperature / 10 - 273.15
+54.05
+PS C:\Windows\system32&gt;
+</code></pre>
 <h2 id="使用软件查看"><a href="#使用软件查看" class="headerlink" title="使用软件查看"></a>使用软件查看</h2><!--软件下载(网盘)：<a href="/2022/04/14/software-download/" title="Software download">Software download</a>-->
 
 <p>软件下载(网盘)：<a href="https://zichenlbl.github.io/2022/04/14/software-download/#Core-Temp">https://zichenlbl.github.io/2022/04/14/software-download/#Core-Temp</a></p>
@@ -123,8 +155,10 @@ var _hmt = _hmt || [];
 <h3 id="AIDA64"><a href="#AIDA64" class="headerlink" title="AIDA64"></a>AIDA64</h3><p>官网下载：<a target="_blank" rel="noopener" href="https://www.aida64.com/downloads">https://www.aida64.com/downloads</a></p>
 <p><img src="/2022/05/28/view-computer-temperature/image-20220529154252793.png" alt="image-20220529154252793"></p>
 <p>MY：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">UK4F4-3F2D6-FJD9J-C4D34-FYY12</span><br><span class="line">UKXB1-Y3ED6-FJD9J-C4D34-FYY1U</span><br><span class="line">UKIU4-933D6-FJD9J-C4D34-FYY1B</span><br></pre></td></tr></table></figure>
-
+<pre><code class="apl">UK4F4-3F2D6-FJD9J-C4D34-FYY12
+UKXB1-Y3ED6-FJD9J-C4D34-FYY1U
+UKIU4-933D6-FJD9J-C4D34-FYY1B
+</code></pre>
 <h3 id="MSI-Afterburner"><a href="#MSI-Afterburner" class="headerlink" title="MSI Afterburner"></a>MSI Afterburner</h3><p>官网下载：<a target="_blank" rel="noopener" href="https://www.msi.com/Landing/afterburner/graphics-cards">https://www.msi.com/Landing/afterburner/graphics-cards</a></p>
 <p><img src="/2022/05/28/view-computer-temperature/image-20220529155019685.png" alt="image-20220529155019685"></p>
 <p>End.</p>
@@ -137,7 +171,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zichenlbl.github.io/2022/05/28/view-computer-temperature/" data-id="clw4yejpl008kvor917n2fijk" class="article-share-link">Share</a>
+      <a data-url="https://zichenlbl.github.io/2022/05/28/view-computer-temperature/" data-id="clwyaipe20090m4r9d5q85zye" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Download/" rel="tag">Download</a></li></ul>
@@ -216,7 +250,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
     </div>
   </div>
 
@@ -229,23 +263,23 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
-            <a href="/2024/03/30/2024-03-30/">2024年03月30日</a>
+            <a href="/2024/04/27/2024-04-27/">2024年04月27日</a>
           </li>
         
           <li>
-            <a href="/2024/03/16/2024-03-16/">2024年03月16日</a>
+            <a href="/2024/04/20/2024-04-20/">2024年04月20日</a>
           </li>
         
           <li>
-            <a href="/2024/03/09/2024-03-09/">2024年03月09日</a>
+            <a href="/2024/04/12/2024-04-12/">2024年04月12日</a>
           </li>
         
           <li>
-            <a href="/2024/03/07/2024-03-07/">2024年03月07日</a>
+            <a href="/2024/04/10/2024-04-10/">2024年04月10日</a>
           </li>
         
           <li>
-            <a href="/2024/03/02/2024-03-02/">2024年03月02日</a>
+            <a href="/2024/04/05/2024-04-05/">2024年04月05日</a>
           </li>
         
       </ul>

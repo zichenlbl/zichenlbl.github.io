@@ -7,12 +7,12 @@
   
   <title>2022年06月09日 | Zichen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="图形验证码后端生成的图片二维码保存为byte[](字节数组)，字节数组转成base64编码字符串，返回前端字符串。 12byte[] mData &#x3D; CheckCodeByPicHelp.f_GetCode(4, ref mCode); &#x2F;&#x2F; 长度, 验证码值string checkcodepic &#x3D; Convert.ToBase64String(mData);  Redis数据库中存 YanZh">
+  <meta name="description" content="图形验证码后端生成的图片二维码保存为byte[](字节数组)，字节数组转成base64编码字符串，返回前端字符串。 byte[] mData &#x3D; CheckCodeByPicHelp.f_GetCode(4, ref mCode); &#x2F;&#x2F; 长度, 验证码值 string checkcodepic &#x3D; Convert.ToBase64String(mData);  Redis数据库中存 YanZhe">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2022年06月09日">
 <meta property="og:url" content="https://zichenlbl.github.io/2022/06/09/2022-06-09/index.html">
 <meta property="og:site_name" content="Zichen">
-<meta property="og:description" content="图形验证码后端生成的图片二维码保存为byte[](字节数组)，字节数组转成base64编码字符串，返回前端字符串。 12byte[] mData &#x3D; CheckCodeByPicHelp.f_GetCode(4, ref mCode); &#x2F;&#x2F; 长度, 验证码值string checkcodepic &#x3D; Convert.ToBase64String(mData);  Redis数据库中存 YanZh">
+<meta property="og:description" content="图形验证码后端生成的图片二维码保存为byte[](字节数组)，字节数组转成base64编码字符串，返回前端字符串。 byte[] mData &#x3D; CheckCodeByPicHelp.f_GetCode(4, ref mCode); &#x2F;&#x2F; 长度, 验证码值 string checkcodepic &#x3D; Convert.ToBase64String(mData);  Redis数据库中存 YanZhe">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-09T14:20:00.000Z">
 <meta property="article:modified_time" content="2023-09-30T13:34:58.041Z">
@@ -25,8 +25,6 @@
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.geekzu.org/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -105,16 +103,27 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="图形验证码"><a href="#图形验证码" class="headerlink" title="图形验证码"></a>图形验证码</h2><p>后端生成的图片二维码保存为<code>byte[]</code>(字节数组)，字节数组转成<code>base64</code>编码字符串，返回前端字符串。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">byte</span>[] mData = CheckCodeByPicHelp.f_GetCode(<span class="number">4</span>, <span class="keyword">ref</span> mCode); <span class="comment">// 长度, 验证码值</span></span><br><span class="line"><span class="built_in">string</span> checkcodepic = Convert.ToBase64String(mData);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c#">byte[] mData = CheckCodeByPicHelp.f_GetCode(4, ref mCode); // 长度, 验证码值
+string checkcodepic = Convert.ToBase64String(mData);
+</code></pre>
 <p>Redis数据库中存 YanZhengMa:<code>GUID</code>(唯一值)，值存验证码(2we3)，过期时间秒；返回前端GUID。</p>
 <span id="more"></span>
 
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">redis.StringSet(<span class="string">&quot;YanZhengMa:03ae6bd2-610a-4fae-8aa9-bb3cc619c5db&quot;</span>,</span><br><span class="line">                <span class="string">&quot;2we3&quot;</span>, </span><br><span class="line">                TimeSpan.FromSeconds(<span class="number">60</span> * <span class="number">60</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c#">redis.StringSet(&quot;YanZhengMa:03ae6bd2-610a-4fae-8aa9-bb3cc619c5db&quot;,
+                &quot;2we3&quot;, 
+                TimeSpan.FromSeconds(60 * 60)
+)
+</code></pre>
 <p>返回数据</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;code&quot;</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="string">&quot;message&quot;</span>: <span class="string">&quot;获取验证码成功&quot;</span>,</span><br><span class="line">  <span class="string">&quot;data&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;codeid&quot;</span>: <span class="string">&quot;03ae6bd2-610a-4fae-8aa9-bb3cc619c5db&quot;</span>,</span><br><span class="line">    <span class="string">&quot;checkcodepic&quot;</span>: <span class="string">&quot;/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAeAGADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD17xL4z0rwtJBFei4lnn5jht0DMRnGeSB1960NE1eLXNMS+htrm3R2KiO5QI4wccgE15N460e5/wCFmaZD/at1uvpI2ik3HNrukIATnjB5GMVc8Z67qnhYaV4Yj1y5G5PNutTkBeYq0jY7k8AHocnA6VyqtLmlzbI+jeU0Z0aMaLvOau3rtrfS3y7tnr1FeIaL41n0rxjp9pZ+IbzWtMu3SKYXqMGRmbbkFsnjIPH0rVi8R3/hr4ieJ7S/v7ma1FpLdWsc0zOqkKJFCgnjgsOPSto1Eziq5RVptq/S60avrZ6Pax61RXhGjeLtZ0vwd4lg1PUbuS+a1gns5JZ2ZwswAypJyMBlPHQ5rYn8R6lonwv0Wzk1CV9a13dsuryc4ijY8uXY8AKy454zntWqVzKpl04O1762/C9/RHVQfFDQLrxavh23jvJblpzAJ0RPJLDrzuzjgjOK7WvnlYNC8P8AxT8Nw6fqNnJY20MfnXazKUZ/n3MzZwDk+vAwK+hI5EljWSN1dHAZWU5BB6EGqnFK1jHFUoU3Hk2aHUUUVByBRRRQBxfiTwhqGseNtF1q3mtltrExmRZGYOdshY4AUjp6kVJ4z8FS+Ibuy1TTr0WWq2RHlSsuVYA5APpg5PfqeK7Cis/ZR18zujmNeLg4v4FZej79zi9P0rx3JqNrJq2vWC2cUgeSK0iOZQOxJUYz7Vk/EL4daj4q1u31HS7m0gYQeTN5zspPJwRtU54YivSqKrlVrCjj6sKiqwSTWmiSR5b45+F19r+o2M2kXNpbww2iWsizOykhD8pAVTnjH5Cuz1bwV4f121sbfU7D7RHYx+XbjzXTYuAD90jP3R19K36Kozni60oxV/h2PJb/AODFpL4wtLmyt7SLw+qr9otXuJvMc85wefb+IdK9Wt4IrW2it4V2xRIERck4UDAHNSUVTk3uZ1K06tud3sFFFFSZBRRRQB//2Q==&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c#">&#123;
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;获取验证码成功&quot;,
+  &quot;data&quot;: &#123;
+    &quot;codeid&quot;: &quot;03ae6bd2-610a-4fae-8aa9-bb3cc619c5db&quot;,
+    &quot;checkcodepic&quot;: &quot;/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAeAGADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD17xL4z0rwtJBFei4lnn5jht0DMRnGeSB1960NE1eLXNMS+htrm3R2KiO5QI4wccgE15N460e5/wCFmaZD/at1uvpI2ik3HNrukIATnjB5GMVc8Z67qnhYaV4Yj1y5G5PNutTkBeYq0jY7k8AHocnA6VyqtLmlzbI+jeU0Z0aMaLvOau3rtrfS3y7tnr1FeIaL41n0rxjp9pZ+IbzWtMu3SKYXqMGRmbbkFsnjIPH0rVi8R3/hr4ieJ7S/v7ma1FpLdWsc0zOqkKJFCgnjgsOPSto1Eziq5RVptq/S60avrZ6Pax61RXhGjeLtZ0vwd4lg1PUbuS+a1gns5JZ2ZwswAypJyMBlPHQ5rYn8R6lonwv0Wzk1CV9a13dsuryc4ijY8uXY8AKy454zntWqVzKpl04O1762/C9/RHVQfFDQLrxavh23jvJblpzAJ0RPJLDrzuzjgjOK7WvnlYNC8P8AxT8Nw6fqNnJY20MfnXazKUZ/n3MzZwDk+vAwK+hI5EljWSN1dHAZWU5BB6EGqnFK1jHFUoU3Hk2aHUUUVByBRRRQBxfiTwhqGseNtF1q3mtltrExmRZGYOdshY4AUjp6kVJ4z8FS+Ibuy1TTr0WWq2RHlSsuVYA5APpg5PfqeK7Cis/ZR18zujmNeLg4v4FZej79zi9P0rx3JqNrJq2vWC2cUgeSK0iOZQOxJUYz7Vk/EL4daj4q1u31HS7m0gYQeTN5zspPJwRtU54YivSqKrlVrCjj6sKiqwSTWmiSR5b45+F19r+o2M2kXNpbww2iWsizOykhD8pAVTnjH5Cuz1bwV4f121sbfU7D7RHYx+XbjzXTYuAD90jP3R19K36Kozni60oxV/h2PJb/AODFpL4wtLmyt7SLw+qr9otXuJvMc85wefb+IdK9Wt4IrW2it4V2xRIERck4UDAHNSUVTk3uZ1K06tud3sFFFFSZBRRRQB//2Q==&quot;
+  &#125;
+&#125;
+</code></pre>
 <h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><p>登录传参为：用户名，密码，验证码，”codeid”: “11ecc80d-0f0b-49f5-8678-201f6768ce3e”，共4个参数。</p>
 <ol>
 <li><p>验证码判断完后，从Redis数据库中删除。</p>
@@ -124,21 +133,65 @@ var _hmt = _hmt || [];
 </ol>
 <p>token：根据用户id，用户编码，用户名生成JWT。TODO：2022年6月9日23:35:48</p>
 <p>session：Redis数据库中存 Session:<code>GUID</code>(唯一值)，值存当前系统时间，登录过期时间秒；返回前端GUID。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">redis.StringSet(<span class="string">&quot;Session:11ecc80d-0f0b-49f5-8678-201f6768ce3e&quot;</span>, </span><br><span class="line">                DateTime.Now.ToString(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>), 		</span><br><span class="line">                TimeSpan.FromSeconds(<span class="number">7</span> * <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="c#">redis.StringSet(&quot;Session:11ecc80d-0f0b-49f5-8678-201f6768ce3e&quot;, 
+                DateTime.Now.ToString(&quot;yyyy-MM-dd HH:mm:ss&quot;),         
+                TimeSpan.FromSeconds(7 * 24 * 60 * 60)
+);
+</code></pre>
 <p>返回数据</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;code&quot;</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="string">&quot;message&quot;</span>: <span class="string">&quot;登录成功&quot;</span>,</span><br><span class="line">  <span class="string">&quot;data&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;user_id&quot;</span>: <span class="string">&quot;001&quot;</span>,</span><br><span class="line">    <span class="string">&quot;token&quot;</span>: <span class="string">&quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOiIwMDEiLCJ1c2VybmFtZSI6IndqbSIsImV4cCI6MTY1MzQ1NzEzNi4wfQ.CFOXrlS0QXr8Ge7G739vFBP03bNVYGtpM6NxDNn5SEM&quot;</span>,</span><br><span class="line">    <span class="string">&quot;xwsessionid&quot;</span>: <span class="string">&quot;11ecc80d-0f0b-49f5-8678-201f6768ce3e&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
+<pre><code class="c#">&#123;
+  &quot;code&quot;: 0,
+  &quot;message&quot;: &quot;登录成功&quot;,
+  &quot;data&quot;: &#123;
+    &quot;user_id&quot;: &quot;001&quot;,
+    &quot;token&quot;: &quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyaWQiOiIwMDEiLCJ1c2VybmFtZSI6IndqbSIsImV4cCI6MTY1MzQ1NzEzNi4wfQ.CFOXrlS0QXr8Ge7G739vFBP03bNVYGtpM6NxDNn5SEM&quot;,
+    &quot;xwsessionid&quot;: &quot;11ecc80d-0f0b-49f5-8678-201f6768ce3e&quot;
+  &#125;
+&#125;
+</code></pre>
 <hr>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> 获取Token</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;pUserInfo&quot;&gt;</span><span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name=&quot;mErr&quot;&gt;</span><span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span><span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">f_GetToken</span>(<span class="params">TokenUserInfo pUserInfo, <span class="keyword">ref</span> <span class="built_in">string</span> pErr</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        IDateTimeProvider provider = <span class="keyword">new</span> UtcDateTimeProvider();</span><br><span class="line">        <span class="keyword">var</span> now = provider.GetNow();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//var unixEpoch = JwtValidator.UnixEpoch; // 1970-01-01 00:00:00 UTC</span></span><br><span class="line">        <span class="keyword">var</span> unixEpoch = <span class="keyword">new</span> DateTime(<span class="number">1970</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, DateTimeKind.Utc);</span><br><span class="line">        <span class="keyword">var</span> secondsSinceEpoch = Math.Round((now - unixEpoch).TotalSeconds);</span><br><span class="line">        secondsSinceEpoch = secondsSinceEpoch + S_TokenTimeOut;</span><br><span class="line">        <span class="keyword">var</span> payload = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">object</span>&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            &#123; <span class="string">&quot;userid&quot;</span>, pUserInfo.S_UserId &#125;,</span><br><span class="line">            &#123; <span class="string">&quot;username&quot;</span>, pUserInfo.S_UserName &#125;,</span><br><span class="line">            &#123; <span class="string">&quot;exp&quot;</span>, secondsSinceEpoch &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        IJwtAlgorithm algorithm = <span class="keyword">new</span> HMACSHA256Algorithm();</span><br><span class="line">        IJsonSerializer serializer = <span class="keyword">new</span> JsonNetSerializer();</span><br><span class="line">        IBase64UrlEncoder urlEncoder = <span class="keyword">new</span> JwtBase64UrlEncoder();</span><br><span class="line">        IJwtEncoder encoder = <span class="keyword">new</span> JwtEncoder(algorithm, serializer, urlEncoder);</span><br><span class="line">        <span class="keyword">var</span> token = encoder.Encode(payload, S_Secret);</span><br><span class="line">        <span class="keyword">return</span> token;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception ex)</span><br><span class="line">    &#123;</span><br><span class="line">        pErr = <span class="string">&quot;获取会话令牌异常：&quot;</span> + ex.Message;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="c#">/// &lt;summary&gt;
+/// 获取Token
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;pUserInfo&quot;&gt;&lt;/param&gt;
+/// &lt;param name=&quot;mErr&quot;&gt;&lt;/param&gt;
+/// &lt;returns&gt;&lt;/returns&gt;
+public static string f_GetToken(TokenUserInfo pUserInfo, ref string pErr)
+&#123;
+    try
+    &#123;
+        IDateTimeProvider provider = new UtcDateTimeProvider();
+        var now = provider.GetNow();
 
+        //var unixEpoch = JwtValidator.UnixEpoch; // 1970-01-01 00:00:00 UTC
+        var unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        var secondsSinceEpoch = Math.Round((now - unixEpoch).TotalSeconds);
+        secondsSinceEpoch = secondsSinceEpoch + S_TokenTimeOut;
+        var payload = new Dictionary&lt;string, object&gt;
+        &#123;
+            &#123; &quot;userid&quot;, pUserInfo.S_UserId &#125;,
+            &#123; &quot;username&quot;, pUserInfo.S_UserName &#125;,
+            &#123; &quot;exp&quot;, secondsSinceEpoch &#125;
+        &#125;;
+        IJwtAlgorithm algorithm = new HMACSHA256Algorithm();
+        IJsonSerializer serializer = new JsonNetSerializer();
+        IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
+        IJwtEncoder encoder = new JwtEncoder(algorithm, serializer, urlEncoder);
+        var token = encoder.Encode(payload, S_Secret);
+        return token;
+    &#125;
+    catch (Exception ex)
+    &#123;
+        pErr = &quot;获取会话令牌异常：&quot; + ex.Message;
+        return &quot;&quot;;
+    &#125;
+&#125;
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zichenlbl.github.io/2022/06/09/2022-06-09/" data-id="clw4yejnl0002vor95wxje89v" class="article-share-link">Share</a>
+      <a data-url="https://zichenlbl.github.io/2022/06/09/2022-06-09/" data-id="clwyaipc80001m4r9dsa04vgr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/" rel="tag">Life</a></li></ul>
@@ -217,7 +270,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
     </div>
   </div>
 
@@ -230,23 +283,23 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
-            <a href="/2024/03/30/2024-03-30/">2024年03月30日</a>
+            <a href="/2024/04/27/2024-04-27/">2024年04月27日</a>
           </li>
         
           <li>
-            <a href="/2024/03/16/2024-03-16/">2024年03月16日</a>
+            <a href="/2024/04/20/2024-04-20/">2024年04月20日</a>
           </li>
         
           <li>
-            <a href="/2024/03/09/2024-03-09/">2024年03月09日</a>
+            <a href="/2024/04/12/2024-04-12/">2024年04月12日</a>
           </li>
         
           <li>
-            <a href="/2024/03/07/2024-03-07/">2024年03月07日</a>
+            <a href="/2024/04/10/2024-04-10/">2024年04月10日</a>
           </li>
         
           <li>
-            <a href="/2024/03/02/2024-03-02/">2024年03月02日</a>
+            <a href="/2024/04/05/2024-04-05/">2024年04月05日</a>
           </li>
         
       </ul>

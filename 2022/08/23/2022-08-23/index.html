@@ -7,12 +7,12 @@
   
   <title>2022年08月23日 | Zichen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. ServiceController.cs请求内容类型: 12[HttpPost][Consumes(&quot;application&#x2F;xml&quot;)] &#x2F;&#x2F; 请求内容类型  1.获取客户端ip 12345var ip &#x3D; context.Request.Headers[&quot;X-Forwarded-For&quot;].FirstOrDefault();if (string.I">
+  <meta name="description" content="1. ServiceController.cs请求内容类型: [HttpPost] [Consumes(&quot;application&#x2F;xml&quot;)] &#x2F;&#x2F; 请求内容类型  1.获取客户端ip var ip &#x3D; context.Request.Headers[&quot;X-Forwarded-For&quot;].FirstOrDefault(); if (string.IsNull">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2022年08月23日">
 <meta property="og:url" content="https://zichenlbl.github.io/2022/08/23/2022-08-23/index.html">
 <meta property="og:site_name" content="Zichen">
-<meta property="og:description" content="1. ServiceController.cs请求内容类型: 12[HttpPost][Consumes(&quot;application&#x2F;xml&quot;)] &#x2F;&#x2F; 请求内容类型  1.获取客户端ip 12345var ip &#x3D; context.Request.Headers[&quot;X-Forwarded-For&quot;].FirstOrDefault();if (string.I">
+<meta property="og:description" content="1. ServiceController.cs请求内容类型: [HttpPost] [Consumes(&quot;application&#x2F;xml&quot;)] &#x2F;&#x2F; 请求内容类型  1.获取客户端ip var ip &#x3D; context.Request.Headers[&quot;X-Forwarded-For&quot;].FirstOrDefault(); if (string.IsNull">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://zichenlbl.github.io/2022/08/23/2022-08-23/image-20220823195716596.png">
 <meta property="og:image" content="https://zichenlbl.github.io/2022/08/23/2022-08-23/image-20220823200242322.png">
@@ -31,8 +31,6 @@
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.geekzu.org/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -111,48 +109,88 @@ var _hmt = _hmt || [];
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-ServiceController-cs"><a href="#1-ServiceController-cs" class="headerlink" title="1. ServiceController.cs"></a>1. ServiceController.cs</h2><p>请求内容类型:</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">HttpPost</span>]</span><br><span class="line">[<span class="meta">Consumes(<span class="string">&quot;application/xml&quot;</span>)</span>] <span class="comment">// 请求内容类型</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="csharp">[HttpPost]
+[Consumes(&quot;application/xml&quot;)] // 请求内容类型
+</code></pre>
 <p>1.获取客户端ip</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ip = context.Request.Headers[<span class="string">&quot;X-Forwarded-For&quot;</span>].FirstOrDefault();</span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">string</span>.IsNullOrEmpty(ip))</span><br><span class="line">&#123;</span><br><span class="line">    ip = context.Connection.RemoteIpAddress.ToString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="csharp">var ip = context.Request.Headers[&quot;X-Forwarded-For&quot;].FirstOrDefault();
+if (string.IsNullOrEmpty(ip))
+&#123;
+    ip = context.Connection.RemoteIpAddress.ToString();
+&#125;
+</code></pre>
 <span id="more"></span>
 
 <h2 id="2-LoginController-cs"><a href="#2-LoginController-cs" class="headerlink" title="2. LoginController.cs"></a>2. LoginController.cs</h2><p>解密</p>
 <p>从指定的字符串加载 XML 文档。</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Create the XmlDocument.</span></span><br><span class="line">XmlDocument doc = <span class="keyword">new</span> XmlDocument();</span><br><span class="line">doc.LoadXml(<span class="string">&quot;&lt;item&gt;&lt;name&gt;wrench&lt;/name&gt;&lt;/item&gt;&quot;</span>);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="csharp">// Create the XmlDocument.
+XmlDocument doc = new XmlDocument();
+doc.LoadXml(&quot;&lt;item&gt;&lt;name&gt;wrench&lt;/name&gt;&lt;/item&gt;&quot;);
+</code></pre>
 <p>获取用户数据：</p>
 <p>“GetUserData”</p>
 <p>获取用户系统信息 ：</p>
 <p>“GetUserSysData”</p>
 <h2 id="3-RegCenterController-cs"><a href="#3-RegCenterController-cs" class="headerlink" title="3. RegCenterController.cs"></a>3. RegCenterController.cs</h2><h3 id="3-1-UserLogin-RegUserLogin-reguser-授权登录"><a href="#3-1-UserLogin-RegUserLogin-reguser-授权登录" class="headerlink" title="3.1 UserLogin(RegUserLogin reguser)授权登录"></a>3.1 UserLogin(RegUserLogin reguser)授权登录</h3><p>登录成功后，获取或设置用于管理此请求的用户会话数据的对象。</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Encoding.UTF8:获取 UTF-8 格式的编码。 GetBytes:将指定字符串中的所有字符编码为一个字节序列。</span></span><br><span class="line">HttpContext.Session.Set(<span class="string">&quot;usercode&quot;</span>, System.Text.Encoding.UTF8.GetBytes(mUserCode));     <span class="comment">//mUserCode:账号</span></span><br><span class="line"><span class="keyword">return</span> RedirectToAction(<span class="keyword">nameof</span>(Index)); <span class="comment">//使用 actionName () Status302Found 重定向到指定的操作。</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="csharp">//Encoding.UTF8:获取 UTF-8 格式的编码。 GetBytes:将指定字符串中的所有字符编码为一个字节序列。
+HttpContext.Session.Set(&quot;usercode&quot;, System.Text.Encoding.UTF8.GetBytes(mUserCode));     //mUserCode:账号
+return RedirectToAction(nameof(Index)); //使用 actionName () Status302Found 重定向到指定的操作。
+</code></pre>
 <p>登录成功后，后续的请求头中带有参数：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie: .AspNetCore.Session=CfDJ8E4uv7iyr91HrL%<span class="number">2B</span>De3iDEY0Y0FaG9q%<span class="number">2F</span>rfrSE%<span class="number">2B</span>wCcmPKHuhnj1%<span class="number">2B</span>eqc5Cdi4l3C3BsjWBBCTcy8jygBJvZp46KTh4jV3v6vp1xRLcb91gzt58cme4hSRGWa6YlJ8%<span class="number">2B</span>hiIIl1Yt4KZTYMWirFBlcDDhfVlDA27OYDUOiIa3c2qJXgZIY</span><br></pre></td></tr></table></figure>
-
+<pre><code class="csharp">Cookie: .AspNetCore.Session=CfDJ8E4uv7iyr91HrL%2BDe3iDEY0Y0FaG9q%2FrfrSE%2BwCcmPKHuhnj1%2Beqc5Cdi4l3C3BsjWBBCTcy8jygBJvZp46KTh4jV3v6vp1xRLcb91gzt58cme4hSRGWa6YlJ8%2BhiIIl1Yt4KZTYMWirFBlcDDhfVlDA27OYDUOiIa3c2qJXgZIY
+</code></pre>
 <p>判断是否带Cookie</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">byte</span>[] mResult = <span class="literal">null</span>;</span><br><span class="line">HttpContext.Session.TryGetValue(<span class="string">&quot;usercode&quot;</span>, <span class="keyword">out</span> mResult);</span><br><span class="line"><span class="keyword">if</span> (mResult == <span class="literal">null</span>) <span class="keyword">return</span> RedirectToAction(<span class="keyword">nameof</span>(UserLogin));</span><br></pre></td></tr></table></figure>
-
+<pre><code class="csharp">byte[] mResult = null;
+HttpContext.Session.TryGetValue(&quot;usercode&quot;, out mResult);
+if (mResult == null) return RedirectToAction(nameof(UserLogin));
+</code></pre>
 <h3 id="3-2-MacView-获取MAC"><a href="#3-2-MacView-获取MAC" class="headerlink" title="3.2 MacView()获取MAC"></a>3.2 MacView()获取MAC</h3><p>获取MAC</p>
 <img src="/2022/08/23/2022-08-23/image-20220823195716596.png" alt="image-20220823195716596" style="zoom: 33%;">
 
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">List&lt;<span class="built_in">string</span>&gt; mMacList = <span class="keyword">new</span> List&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">    mMacList.Clear();</span><br><span class="line">    <span class="keyword">var</span> networks = NetworkInterface.GetAllNetworkInterfaces(); <span class="comment">//返回描述本地计算机上的网络接口的对象。</span></span><br><span class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> network <span class="keyword">in</span> networks)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (network.NetworkInterfaceType == NetworkInterfaceType.Ethernet) <span class="comment">//网络接口使用以太网连接</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> physicalAddress = network.GetPhysicalAddress(); <span class="comment">//返回此适配器的媒体访问控制 (MAC) 或物理地址。</span></span><br><span class="line">            <span class="built_in">string</span> macAddressStr = <span class="built_in">string</span>.Join(<span class="string">&quot;:&quot;</span>, physicalAddress.GetAddressBytes().Select(b =&gt; b.ToString(<span class="string">&quot;X2&quot;</span>)));</span><br><span class="line">            macAddressStr = macAddressStr.Replace(<span class="string">&quot;-&quot;</span>, <span class="string">&quot;&quot;</span>).Replace(<span class="string">&quot;:&quot;</span>, <span class="string">&quot;&quot;</span>).ToUpper();</span><br><span class="line">            <span class="keyword">if</span> (!mMacList.Contains(macAddressStr))</span><br><span class="line">            &#123;</span><br><span class="line">                mMacList.Add(macAddressStr);</span><br><span class="line">            &#125;</span><br><span class="line">            Console.WriteLine(macAddressStr);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> &#123; &#125;</span><br><span class="line"><span class="keyword">return</span> mMacList;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="csharp">List&lt;string&gt; mMacList = new List&lt;string&gt;();
+try
+&#123;
+    mMacList.Clear();
+    var networks = NetworkInterface.GetAllNetworkInterfaces(); //返回描述本地计算机上的网络接口的对象。
+    foreach (var network in networks)
+    &#123;
+        if (network.NetworkInterfaceType == NetworkInterfaceType.Ethernet) //网络接口使用以太网连接
+        &#123;
+            var physicalAddress = network.GetPhysicalAddress(); //返回此适配器的媒体访问控制 (MAC) 或物理地址。
+            string macAddressStr = string.Join(&quot;:&quot;, physicalAddress.GetAddressBytes().Select(b =&gt; b.ToString(&quot;X2&quot;)));
+            macAddressStr = macAddressStr.Replace(&quot;-&quot;, &quot;&quot;).Replace(&quot;:&quot;, &quot;&quot;).ToUpper();
+            if (!mMacList.Contains(macAddressStr))
+            &#123;
+                mMacList.Add(macAddressStr);
+            &#125;
+            Console.WriteLine(macAddressStr);
+        &#125;
+    &#125;
+&#125;
+catch &#123; &#125;
+return mMacList;
+</code></pre>
 <h3 id="3-3-EditReg-RegData-regdata-导入授权"><a href="#3-3-EditReg-RegData-regdata-导入授权" class="headerlink" title="3.3 EditReg(RegData regdata)导入授权"></a>3.3 EditReg(RegData regdata)导入授权</h3><h4 id="3-3-1-获取授权"><a href="#3-3-1-获取授权" class="headerlink" title="3.3.1 获取授权"></a>3.3.1 获取授权</h4><p>授权文件读取字符串，获取授权：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> RegEntity <span class="title">f_CheckLicense</span>(<span class="params"><span class="built_in">string</span> pLicense, <span class="built_in">string</span> pSignKey, <span class="keyword">ref</span> <span class="built_in">string</span> pErr</span>)</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="csharp">public static RegEntity f_CheckLicense(string pLicense, string pSignKey, ref string pErr)
+</code></pre>
 <p>把pLicense(base64字符串)还原，反序列化为RegEntity类(注册信息)，获取MAC并验证是否与注册信息一致。</p>
 <h4 id="3-3-2-获取验签数据"><a href="#3-3-2-获取验签数据" class="headerlink" title="3.3.2 获取验签数据"></a>3.3.2 获取验签数据</h4><p>将注册信息(RegEntity类)和程序注册签名密钥pSignKey(Startup.cs请求管道中已指定密钥)</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">f_GetSingAture</span>(<span class="params">RegEntity pRegEntity, <span class="built_in">string</span> pSignKey</span>)</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="csharp">public static string f_GetSingAture(RegEntity pRegEntity, string pSignKey)
+</code></pre>
 <p>验签字符串：机构名称+mac地址+系统类型和授权数+创建时间</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> mRegEntityStr = <span class="string">&quot;&quot;</span>; <span class="comment">//验签字符串</span></span><br><span class="line"><span class="comment">//...拼接验签字符串</span></span><br><span class="line"><span class="keyword">using</span> (HMACSHA256 mac = <span class="keyword">new</span> HMACSHA256(Encoding.UTF8.GetBytes(pSignKey)))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">byte</span>[] hash = mac.ComputeHash(Encoding.UTF8.GetBytes(mRegEntityStr));</span><br><span class="line">    signRet = Convert.ToBase64String(hash);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> mRegEntityStr;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="csharp">string mRegEntityStr = &quot;&quot;; //验签字符串
+//...拼接验签字符串
+using (HMACSHA256 mac = new HMACSHA256(Encoding.UTF8.GetBytes(pSignKey)))
+&#123;
+    byte[] hash = mac.ComputeHash(Encoding.UTF8.GetBytes(mRegEntityStr));
+    signRet = Convert.ToBase64String(hash);
+&#125;
+return mRegEntityStr;
+</code></pre>
 <p>判断验签字符串与注册信息(mRegEntity)的验签字符串是否一致:</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (mRegEntity.singature != mRegEntityStr) <span class="keyword">return</span>; <span class="comment">//不一致</span></span><br><span class="line"><span class="keyword">return</span> mRegEntity; <span class="comment">//一致</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="csharp">if (mRegEntity.singature != mRegEntityStr) return; //不一致
+return mRegEntity; //一致
+</code></pre>
 <h4 id="3-3-3-修改或新增"><a href="#3-3-3-修改或新增" class="headerlink" title="3.3.3 修改或新增"></a>3.3.3 修改或新增</h4><p>判断iid是否存在，存在则修改，不存在则新增。</p>
 <hr>
 <p>远程连接桌面：win+R，输入 mstsc</p>
@@ -169,7 +207,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zichenlbl.github.io/2022/08/23/2022-08-23/" data-id="clw4yejnt000ivor9delc8gja" class="article-share-link">Share</a>
+      <a data-url="https://zichenlbl.github.io/2022/08/23/2022-08-23/" data-id="clwyaipcj000mm4r901cf1yw5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Life/" rel="tag">Life</a></li></ul>
@@ -248,7 +286,7 @@ var _hmt = _hmt || [];
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">四月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li></ul>
     </div>
   </div>
 
@@ -261,23 +299,23 @@ var _hmt = _hmt || [];
       <ul>
         
           <li>
-            <a href="/2024/03/30/2024-03-30/">2024年03月30日</a>
+            <a href="/2024/04/27/2024-04-27/">2024年04月27日</a>
           </li>
         
           <li>
-            <a href="/2024/03/16/2024-03-16/">2024年03月16日</a>
+            <a href="/2024/04/20/2024-04-20/">2024年04月20日</a>
           </li>
         
           <li>
-            <a href="/2024/03/09/2024-03-09/">2024年03月09日</a>
+            <a href="/2024/04/12/2024-04-12/">2024年04月12日</a>
           </li>
         
           <li>
-            <a href="/2024/03/07/2024-03-07/">2024年03月07日</a>
+            <a href="/2024/04/10/2024-04-10/">2024年04月10日</a>
           </li>
         
           <li>
-            <a href="/2024/03/02/2024-03-02/">2024年03月02日</a>
+            <a href="/2024/04/05/2024-04-05/">2024年04月05日</a>
           </li>
         
       </ul>
